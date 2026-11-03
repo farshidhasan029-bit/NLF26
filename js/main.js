@@ -51,9 +51,12 @@
       });
     });
 
-    // --- 3. SCROLL REVEAL OBSERVER ---
+    // --- 3. SCROLL REVEAL OBSERVER (PROACTIVE & FAILSAFE) ---
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && reveals.length > 0) {
+      document.documentElement.classList.add('js-reveal');
+      const winHeight = window.innerHeight || document.documentElement.clientHeight;
+
       const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -63,10 +66,22 @@
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0, rootMargin: '120px 0px 120px 0px' }
       );
 
-      reveals.forEach((el) => revealObserver.observe(el));
+      reveals.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < winHeight * 1.25) {
+          el.classList.add('visible');
+        } else {
+          revealObserver.observe(el);
+        }
+      });
+
+      // Safety timeout: Ensure all elements become visible even on mobile desktop emulation
+      setTimeout(() => {
+        reveals.forEach((el) => el.classList.add('visible'));
+      }, 500);
     } else {
       reveals.forEach((el) => el.classList.add('visible'));
     }

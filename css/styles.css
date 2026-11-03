@@ -15,17 +15,23 @@
   display: none !important;
 }
 
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 /* ── BODY (CLEAN WHITE BACKGROUND FOR CONTENT) ── */
 body {
-  margin: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
   color: #0f172a;
   background-color: #ffffff;
   min-height: 100vh;
@@ -197,16 +203,21 @@ body {
   transform: translateY(-2px);
 }
 
-/* ── SCROLL REVEAL ── */
+/* ── SCROLL REVEAL (FAILSAFE: PREVENTS BLANK VOIDS IN DESKTOP EMULATION) ── */
 .reveal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.js-reveal .reveal:not(.visible) {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transform: translateY(12px);
 }
 
 .reveal.visible {
-  opacity: 1;
-  transform: none;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* ── NO SCROLLBAR UTILITY ── */

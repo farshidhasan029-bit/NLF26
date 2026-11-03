@@ -60,7 +60,7 @@
   <!-- ======================================================== -->
   <header class="fixed top-0 left-0 right-0 z-50" x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false">
     <nav id="navbar" class="navbar bg-[#021611]/90 backdrop-blur-md border-b border-white/10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 w-full">
           
           <!-- Main BAULC Logo & Brand Title -->
@@ -154,7 +154,7 @@
   <!-- 2. HERO SECTION (PAGE 1 SPEC)                            -->
   <!-- ======================================================== -->
   <section id="hero" class="min-h-[85vh] flex flex-col justify-center relative pt-28 sm:pt-36 pb-16 sm:pb-20 bg-[#032119] text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
         <!-- Left Column: Display Title, Paragraph, and 2 Buttons -->
@@ -237,11 +237,11 @@
   <!-- ======================================================== -->
   <!-- 3. ABOUT SECTION (PAGE 2 SPEC)                           -->
   <!-- ======================================================== -->
-  <section id="about" class="py-20 relative z-10 bg-white border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="about" class="py-12 sm:py-16 relative z-10 bg-white border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Display Title -->
-      <div class="max-w-4xl mb-10 reveal">
+      <div class="mb-8 sm:mb-10 reveal">
         <h2 class="font-display text-5xl sm:text-6xl text-slate-900 leading-tight mb-4 tracking-wide">
           ABOUT THE EVENT
         </h2>
@@ -251,7 +251,7 @@
       </div>
 
       <!-- 3 Numbered Milestone Cards -->
-      <div class="space-y-4 mb-14 max-w-4xl reveal">
+      <div class="space-y-4 mb-10 sm:mb-12 reveal">
         <div class="border border-slate-200 bg-slate-50 hover:bg-slate-100/70 rounded-xl p-5 flex items-start gap-4 transition-all shadow-sm">
           <span class="font-display text-2xl sm:text-3xl text-emerald-700 leading-none min-w-[28px]">1.</span>
           <p class="font-sans text-base sm:text-lg font-semibold text-slate-900 pt-0.5">
@@ -275,7 +275,7 @@
       </div>
 
       <!-- 4 Statistics Counters Exactly from Wireframe -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16 reveal">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10 sm:mb-12 reveal">
         <div class="border border-slate-200 bg-slate-50 rounded-xl py-6 px-4 text-center shadow-sm">
           <div class="font-display text-4xl sm:text-5xl text-slate-900 stat-number" data-target="3000" data-suffix="+">3,000+</div>
           <div class="text-slate-600 text-xs sm:text-sm font-sans uppercase tracking-wider mt-2 font-semibold">Participants</div>
@@ -295,7 +295,7 @@
       </div>
 
       <!-- PRIZE POOL (PAGE 2 SPEC) -->
-      <div class="max-w-4xl mx-auto reveal">
+      <div class="reveal">
         <div class="text-center mb-6">
           <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
             PRIZE POOL
@@ -325,16 +325,16 @@
   <!-- ======================================================== -->
   <!-- 4. TIMELINE SECTION (PAGE 3 SPEC)                        -->
   <!-- ======================================================== -->
-  <section id="timeline" class="py-20 relative z-10 bg-slate-50 border-t border-slate-200">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <section id="timeline" class="py-12 sm:py-16 relative z-10 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <!-- DISPLAY TITLE -->
-      <h2 class="font-display text-6xl sm:text-7xl lg:text-8xl text-slate-900 tracking-wide mb-12 reveal">
+      <h2 class="font-display text-6xl sm:text-7xl lg:text-8xl text-slate-900 tracking-wide mb-8 sm:mb-10 reveal">
         TIMELINE
       </h2>
 
       <!-- Exact Day 1 / Day 2 Structure from Page 3 Wireframe -->
-      <div class="space-y-6 max-w-2xl mx-auto text-left">
+      <div class="space-y-6 max-w-3xl mx-auto text-left">
         
         <!-- Day 1 Block -->
         <div class="reveal">
@@ -373,10 +373,10 @@
   <!-- ======================================================== -->
   <!-- 5. SEGMENTS SECTION (PAGE 3 SPEC: 12 SEGMENTS 3x4 GRID)  -->
   <!-- ======================================================== -->
-  <section id="segments" class="py-20 relative z-10 bg-white border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="segments" class="py-12 sm:py-16 relative z-10 bg-white border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center mb-14 reveal">
+      <div class="text-center mb-10 sm:mb-12 reveal">
         <h2 class="font-display text-6xl sm:text-7xl lg:text-8xl text-slate-900 leading-tight mb-3 tracking-wide">
           SEGMENTS
         </h2>
@@ -471,11 +471,11 @@
   <!-- ======================================================== -->
   <!-- 6. PROCESS & REGISTRATION (PAGE 4 SPEC)                  -->
   <!-- ======================================================== -->
-  <section id="process" class="py-20 relative z-10 bg-slate-50 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="process" class="py-12 sm:py-16 relative z-10 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Title & Subtitle -->
-      <div class="max-w-3xl mb-12 reveal">
+      <div class="mb-8 sm:mb-10 reveal">
         <h2 class="font-display text-5xl sm:text-6xl text-slate-900 leading-tight mb-2 tracking-wide">
           PROCESS
         </h2>
@@ -485,7 +485,7 @@
       </div>
 
       <!-- 3-Step Milestone Progression -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 reveal">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 sm:mb-10 reveal">
         
         <!-- Step 1 -->
         <div class="border border-slate-200 bg-white rounded-xl p-6 shadow-sm">
@@ -511,7 +511,7 @@
       </div>
 
       <!-- Eligibility Guidelines & Ready to Compete Grid -->
-      <div class="grid lg:grid-cols-2 gap-8 items-stretch mb-16">
+      <div class="grid lg:grid-cols-2 gap-8 items-stretch mb-10 sm:mb-12">
         
         <!-- Left: ELIGIBILITY GUIDELINES -->
         <div class="border border-slate-200 bg-white rounded-xl p-7 shadow-sm reveal space-y-4">
@@ -543,7 +543,7 @@
       </div>
 
       <!-- FREQUENTLY ASKED QUESTIONS (PAGE 4 SPEC) -->
-      <div class="max-w-3xl mx-auto reveal">
+      <div class="max-w-4xl mx-auto reveal">
         <div class="text-center mb-8">
           <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
             Frequently Asked Questions
@@ -600,11 +600,11 @@
   <!-- ======================================================== -->
   <!-- 7. LEGACY SECTION (PAGES 5, 6, 7, 8 SPEC)                -->
   <!-- ======================================================== -->
-  <section id="legacy" class="py-20 relative z-10 bg-white border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="legacy" class="py-12 sm:py-16 relative z-10 bg-white border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Super-Header -->
-      <div class="text-center mb-16 reveal">
+      <div class="text-center mb-10 sm:mb-12 reveal">
         <span class="text-xs uppercase font-sans font-semibold tracking-widest text-emerald-700">
           History &bull; Heritage &bull; Impact
         </span>
@@ -619,7 +619,7 @@
       <!-- ---------------------------------------------------- -->
       <!-- 7.1 MEET THE HOST (PAGE 5 SPEC)                      -->
       <!-- ---------------------------------------------------- -->
-      <div class="max-w-4xl mx-auto mb-20 reveal">
+      <div class="max-w-5xl mx-auto mb-10 sm:mb-12 reveal">
         <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
           
           <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
@@ -653,7 +653,7 @@
       <!-- ---------------------------------------------------- -->
       <!-- 7.2 NLF23 (PAGE 6 SPEC)                              -->
       <!-- ---------------------------------------------------- -->
-      <div class="max-w-4xl mx-auto mb-20 reveal">
+      <div class="max-w-5xl mx-auto mb-10 sm:mb-12 reveal">
         <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
           
           <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
@@ -743,7 +743,7 @@
       <!-- ---------------------------------------------------- -->
       <!-- 7.3 NLF24 (PAGE 7 SPEC)                              -->
       <!-- ---------------------------------------------------- -->
-      <div class="max-w-4xl mx-auto mb-20 reveal">
+      <div class="max-w-5xl mx-auto mb-10 sm:mb-12 reveal">
         <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
           
           <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
@@ -842,7 +842,7 @@
       <!-- ---------------------------------------------------- -->
       <!-- 7.4 NLF25 (PAGE 8 SPEC)                              -->
       <!-- ---------------------------------------------------- -->
-      <div class="max-w-4xl mx-auto reveal">
+      <div class="max-w-5xl mx-auto reveal">
         <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
           
           <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
@@ -926,17 +926,17 @@
   <!-- ======================================================== -->
   <!-- 8. CONTACT SECTION (PAGE 8 SPEC)                         -->
   <!-- ======================================================== -->
-  <section id="contact" class="py-16 relative z-10 bg-slate-50 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="contact" class="py-12 sm:py-14 relative z-10 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="mb-10 text-center reveal">
+      <div class="mb-8 sm:mb-10 text-center reveal">
         <h2 class="font-display text-5xl sm:text-6xl text-slate-900 leading-tight mb-2 tracking-wide">
           CONTACT
         </h2>
         <p class="text-slate-600 text-sm font-sans">Reach out to the organizing committee for queries and delegation support.</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
         <!-- Venue -->
         <div class="border border-slate-200 bg-white rounded-xl p-6 text-center shadow-sm reveal">
           <i class="fa-solid fa-location-dot text-amber-600 text-xl mb-3"></i>
@@ -968,8 +968,8 @@
   <!-- ======================================================== -->
   <!-- 9. FOOTER (PAGE 8 SPEC: MATCHED WITH HEADER LINKS)       -->
   <!-- ======================================================== -->
-  <footer class="bg-white text-slate-800 py-12 border-t border-slate-200 relative z-10">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+  <footer class="bg-white text-slate-800 py-10 sm:py-12 border-t border-slate-200 relative z-10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
       <!-- BAULC Emblem & Motto -->
       <div class="flex flex-col items-center justify-center gap-2 mb-6">
