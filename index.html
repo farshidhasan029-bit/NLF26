@@ -32,6 +32,13 @@
   <script>
     tailwind.config = {
       theme: {
+        screens: {
+          'sm': '640px',
+          'md': '768px',
+          'lg': '900px',
+          'xl': '1280px',
+          '2xl': '1536px',
+        },
         extend: {
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
@@ -153,19 +160,19 @@
   <!-- ======================================================== -->
   <!-- 2. HERO SECTION (PAGE 1 SPEC)                            -->
   <!-- ======================================================== -->
-  <section id="hero" class="min-h-[85vh] flex flex-col justify-center relative pt-28 sm:pt-36 pb-16 sm:pb-20 bg-[#032119] text-white">
+  <section id="hero" class="min-h-0 md:min-h-[75vh] flex flex-col justify-center relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 bg-[#032119] text-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div class="grid md:grid-cols-12 gap-8 lg:gap-12 items-center">
 
         <!-- Left Column: Display Title, Paragraph, and 2 Buttons -->
-        <div class="lg:col-span-7 reveal">
+        <div class="md:col-span-7 reveal">
           <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fdba12]/15 border border-[#fdba12]/30 text-[#fdba12] text-xs font-semibold tracking-wide mb-5 font-sans">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>BAU LANGUAGE CLUB &bull; NOVEMBER 2026</span>
           </div>
 
           <!-- Stacked Headline Exactly Matching Wireframe -->
-          <h1 class="font-display text-white text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] mb-5 tracking-wide" style="text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);">
+          <h1 class="font-display text-white text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] mb-5 tracking-wide" style="text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);">
             National<br>
             Language<br>
             Fest<br>
@@ -189,15 +196,15 @@
         </div>
 
         <!-- Right Column: Logo Box (White bg with hover shadow) & Countdown Clock -->
-        <div class="lg:col-span-5 flex flex-col gap-5 justify-center lg:justify-end reveal" style="transition-delay: 0.1s;">
+        <div class="md:col-span-5 flex flex-col gap-4 sm:gap-5 justify-center md:justify-end reveal" style="transition-delay: 0.1s;">
           
           <!-- Box 1: nlf-logo.png on White background with box shadow on hover (PAGE 1 SPEC) -->
-          <div class="hero-logo-box bg-white rounded-none shadow-xl p-6 sm:p-7 w-full max-w-md mx-auto lg:mr-0">
-            <img src="assets/logos/nlf_logo.png" alt="National Language Fest 2026 Official Logo" class="w-full max-h-56 sm:max-h-64 object-contain">
+          <div class="hero-logo-box bg-white rounded-none shadow-xl p-5 sm:p-6 w-full max-w-md mx-auto md:mr-0">
+            <img src="assets/logos/nlf_logo.png" alt="National Language Fest 2026 Official Logo" class="w-full max-h-48 sm:max-h-56 md:max-h-56 object-contain">
           </div>
 
           <!-- Box 2: Live Countdown Clock -->
-          <div class="w-full max-w-md mx-auto lg:mr-0 rounded-none border border-white/15 bg-black/45 backdrop-blur-md p-6 sm:p-7 shadow-2xl">
+          <div class="w-full max-w-md mx-auto md:mr-0 rounded-none border border-white/15 bg-black/45 backdrop-blur-md p-5 sm:p-6 shadow-2xl">
             <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
               <div class="flex items-center gap-2 text-white/90 text-xs font-semibold tracking-wider uppercase font-sans">
                 <i class="fa-regular fa-clock text-[#fdba12]"></i>
@@ -275,7 +282,7 @@
       </div>
 
       <!-- 4 Statistics Counters Exactly from Wireframe -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10 sm:mb-12 reveal">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 sm:mb-12 reveal">
         <div class="border border-slate-200 bg-slate-50 rounded-xl py-6 px-4 text-center shadow-sm">
           <div class="font-display text-4xl sm:text-5xl text-slate-900 stat-number" data-target="3000" data-suffix="+">3,000+</div>
           <div class="text-slate-600 text-xs sm:text-sm font-sans uppercase tracking-wider mt-2 font-semibold">Participants</div>
@@ -386,7 +393,7 @@
       </div>
 
       <!-- 12 SEGMENTS (EXACT 3x4 GRID FROM SPECIFICATION) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
         
         <!-- 1. সাহিত্যোৎসব -->
         <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
@@ -529,7 +536,7 @@
       </div>
 
       <!-- Eligibility Guidelines & Ready to Compete Grid -->
-      <div class="grid lg:grid-cols-2 gap-8 items-stretch mb-10 sm:mb-12">
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8 items-stretch mb-10 sm:mb-12">
         
         <!-- Left: ELIGIBILITY GUIDELINES -->
         <div class="border border-slate-200 bg-white rounded-xl p-7 shadow-sm reveal space-y-4">
@@ -705,7 +712,7 @@
                 Keynote Speakers of NLF23
               </h4>
 
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
                 <!-- Selina Hossain -->
                 <div class="speaker-card flex flex-col items-center">
                   <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
@@ -795,7 +802,7 @@
                 Keynote Speakers of NLF24
               </h4>
 
-              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 md:gap-3.5">
                 <!-- Kingkor Ahsan -->
                 <div class="speaker-card flex flex-col items-center">
                   <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
@@ -894,7 +901,7 @@
                 Keynote Speakers of NLF25
               </h4>
 
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 md:gap-4">
                 <!-- Sadat Hossain -->
                 <div class="speaker-card flex flex-col items-center">
                   <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
