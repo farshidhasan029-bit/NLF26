@@ -221,7 +221,7 @@ body {
 /* ── HERO LOGO BOX (SPEC: White background with box shadow on hover) ── */
 .hero-logo-box {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
