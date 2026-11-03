@@ -59,7 +59,7 @@
   <!-- 1. STICKY HEADER & NAVBAR (PAGE 1 SPEC)                  -->
   <!-- ======================================================== -->
   <header class="fixed top-0 left-0 right-0 z-50" x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false">
-    <nav id="navbar" class="navbar border-b border-white/10">
+    <nav id="navbar" class="navbar bg-[#021611]/90 backdrop-blur-md border-b border-white/10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16 w-full">
           
@@ -86,7 +86,7 @@
 
           <!-- Desktop CTA -->
           <div class="hidden md:flex items-center gap-4">
-            <a href="#process" class="btn-gold text-xs px-5 py-2 uppercase tracking-wider font-bold">
+            <a href="#process" class="btn-gold bg-[#fdba12] text-[#032119] text-xs px-5 py-2 uppercase tracking-wider font-bold">
               Register
             </a>
           </div>
@@ -142,7 +142,7 @@
         </a>
 
         <div class="pt-3 pb-1">
-          <a href="#process" @click="mobileMenuOpen = false" class="btn-gold flex items-center justify-center w-full text-xs py-2.5 uppercase tracking-wider font-bold shadow-md">
+          <a href="#process" @click="mobileMenuOpen = false" class="btn-gold bg-[#fdba12] text-[#032119] flex items-center justify-center w-full text-xs py-2.5 uppercase tracking-wider font-bold shadow-md">
             Register
           </a>
         </div>
@@ -153,7 +153,7 @@
   <!-- ======================================================== -->
   <!-- 2. HERO SECTION (PAGE 1 SPEC)                            -->
   <!-- ======================================================== -->
-  <section id="hero" class="min-h-[85vh] flex flex-col justify-center relative pt-28 sm:pt-36 pb-16 sm:pb-20">
+  <section id="hero" class="min-h-[85vh] flex flex-col justify-center relative pt-28 sm:pt-36 pb-16 sm:pb-20 bg-[#032119] text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
       <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
@@ -179,10 +179,10 @@
 
           <!-- Register and Details Buttons -->
           <div class="flex flex-wrap items-center gap-3">
-            <a href="#process" class="btn-gold px-8 py-3 text-xs sm:text-sm uppercase tracking-wider font-bold shadow-lg">
+            <a href="#process" class="btn-gold bg-[#fdba12] text-[#032119] px-8 py-3 text-xs sm:text-sm uppercase tracking-wider font-bold shadow-lg">
               Register
             </a>
-            <a href="#about" class="btn-outline-white px-8 py-3 text-xs sm:text-sm uppercase tracking-wider font-semibold">
+            <a href="#about" class="btn-outline-white border border-white/30 text-white hover:bg-white/10 px-8 py-3 text-xs sm:text-sm uppercase tracking-wider font-semibold">
               Details
             </a>
           </div>
@@ -192,7 +192,7 @@
         <div class="lg:col-span-5 flex flex-col gap-5 justify-center lg:justify-end reveal" style="transition-delay: 0.1s;">
           
           <!-- Box 1: nlf-logo.png on White background with box shadow on hover (PAGE 1 SPEC) -->
-          <div class="hero-logo-box p-6 sm:p-7 w-full max-w-md mx-auto lg:mr-0">
+          <div class="hero-logo-box bg-white rounded-2xl shadow-xl p-6 sm:p-7 w-full max-w-md mx-auto lg:mr-0">
             <img src="assets/logos/nlf_logo.png" alt="National Language Fest 2026 Official Logo" class="w-full max-h-56 sm:max-h-64 object-contain">
           </div>
 
