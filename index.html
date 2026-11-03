@@ -419,10 +419,10 @@
   <!-- ======================================================== -->
   <!-- 5. SEGMENTS SECTION (PAGE 3 SPEC: 12 SEGMENTS 3x4 GRID)  -->
   <!-- ======================================================== -->
-  <section id="segments" class="py-12 sm:py-16 relative z-10 bg-white border-t border-slate-200">
+  <section id="segments" class="py-12 sm:py-16 relative z-10 bg-white border-t border-slate-200" x-data="{ activeFilter: 'all' }">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center mb-10 sm:mb-12 reveal">
+      <div class="text-center mb-8 sm:mb-10 reveal">
         <h2 class="font-display text-6xl sm:text-7xl lg:text-8xl text-slate-900 leading-tight mb-3 tracking-wide">
           SEGMENTS
         </h2>
@@ -431,82 +431,396 @@
         </p>
       </div>
 
-      <!-- 12 SEGMENTS (EXACT 3x4 GRID FROM SPECIFICATION) -->
+      <!-- Interactive Category Filter (Organized & Thoughtful) -->
+      <div class="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10 reveal">
+        <button 
+          @click="activeFilter = 'all'" 
+          :class="activeFilter === 'all' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
+          class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
+          <span>All Segments</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'all' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">12</span>
+        </button>
+
+        <button 
+          @click="activeFilter = 'bangla'" 
+          :class="activeFilter === 'bangla' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
+          class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
+          <i class="fa-solid fa-feather-pointed text-xs"></i>
+          <span>Bangla Heritage</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'bangla' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">3</span>
+        </button>
+
+        <button 
+          @click="activeFilter = 'global'" 
+          :class="activeFilter === 'global' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
+          class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
+          <i class="fa-solid fa-earth-americas text-xs"></i>
+          <span>Global Olympiads</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'global' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">5</span>
+        </button>
+
+        <button 
+          @click="activeFilter = 'creative'" 
+          :class="activeFilter === 'creative' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
+          class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
+          <i class="fa-solid fa-lightbulb text-xs"></i>
+          <span>Creative &amp; Arts</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'creative' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">4</span>
+        </button>
+      </div>
+
+      <!-- 12 SEGMENTS (3x4 GRID WITH THOUGHTFUL DETAILS) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
         
         <!-- 1. সাহিত্যোৎসব -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900">সাহিত্যোৎসব</h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'bangla'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-800 border border-emerald-200">
+                বাংলা সাহিত্য
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">01</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-feather-pointed"></i>
+              </div>
+              <div>
+                <h4 class="font-bengali text-xl font-bold text-slate-900 leading-snug">সাহিত্যোৎসব</h4>
+                <span class="text-[11px] text-slate-500 font-sans block">Bengali Literary Olympiad</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Exploring the depth of Bengali prose, poetry, and creative literary expression through written challenges.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-emerald-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 2. ব্যাকরণ ব্যঞ্জন -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900">ব্যাকরণ ব্যঞ্জন</h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'bangla'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-800 border border-emerald-200">
+                বাংলা ব্যাকরণ
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">02</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-spell-check"></i>
+              </div>
+              <div>
+                <h4 class="font-bengali text-xl font-bold text-slate-900 leading-snug">ব্যাকরণ ব্যঞ্জন</h4>
+                <span class="text-[11px] text-slate-500 font-sans block">Grammar &amp; Linguistics</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Testing precision and mastery in Bengali morphology, syntax, wordplay, and classical grammatical rules.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-emerald-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 3. Fiction Fusion -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Fiction Fusion</h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-blue-100 text-blue-800 border border-blue-200">
+                Creative Writing
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">03</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-blue-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-pen-fancy"></i>
+              </div>
+              <div>
+                <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Fiction Fusion</h4>
+                <span class="text-[11px] text-slate-500 font-sans block">Cross-Genre Storytelling</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Original creative fiction crafting that weaves intricate plotlines, inventive themes, and multi-layered narratives.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-blue-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 4. Connecting the dots -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Connecting the dots</h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-amber-100 text-amber-800 border border-amber-200">
+                Critical Thinking
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">04</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-amber-600 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-circle-nodes"></i>
+              </div>
+              <div>
+                <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Connecting the dots</h4>
+                <span class="text-[11px] text-slate-500 font-sans block">Logic, Speech &amp; Synthesis</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Analytical puzzle resolution, spontaneous synthesis of diverse themes, and rapid extempore articulation.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-amber-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 5. Japanese -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-            <span>Japanese</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 font-semibold">日本語</span>
-          </h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-rose-100 text-rose-800 border border-rose-200">
+                Global Language
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">05</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-rose-600 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-torii-gate"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Japanese</h4>
+                  <span class="text-xs px-2 py-0.5 rounded-none bg-rose-100 text-rose-700 font-semibold border border-rose-200 font-sans">日本語</span>
+                </div>
+                <span class="text-[11px] text-slate-500 font-sans block">Nihongo Olympiad &amp; Culture</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Testing kana &amp; kanji recognition, vocabulary proficiency, sentence formation, and Japanese cultural insights.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-rose-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 6. Spanish -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-            <span>Spanish</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-semibold">Español</span>
-          </h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-amber-100 text-amber-800 border border-amber-200">
+                Global Language
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">06</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-amber-600 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-earth-americas"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Spanish</h4>
+                  <span class="text-xs px-2 py-0.5 rounded-none bg-amber-100 text-amber-700 font-semibold border border-amber-200 font-sans">Español</span>
+                </div>
+                <span class="text-[11px] text-slate-500 font-sans block">Hispanophone Linguistic Challenge</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Conversational vocabulary, grammatical structures, listening cues, and Spanish-speaking world heritage.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-amber-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 7. German -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-            <span>German</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 font-semibold">Deutsch</span>
-          </h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-yellow-100 text-yellow-800 border border-yellow-200">
+                Global Language
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">07</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-yellow-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-landmark"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">German</h4>
+                  <span class="text-xs px-2 py-0.5 rounded-none bg-yellow-100 text-yellow-800 font-semibold border border-yellow-200 font-sans">Deutsch</span>
+                </div>
+                <span class="text-[11px] text-slate-500 font-sans block">Deutsch Sprachwettbewerb</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Vocabulary aptitude, German grammar principles, reading comprehension, and communicative logic.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-yellow-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 8. Arabic -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-            <span>Arabic</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">العربية</span>
-          </h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-800 border border-emerald-200">
+                Global Language
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">08</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-moon"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Arabic</h4>
+                  <span class="text-xs px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-800 font-semibold border border-emerald-200 font-sans">العربية</span>
+                </div>
+                <span class="text-[11px] text-slate-500 font-sans block">Fusha &amp; Calligraphic Heritage</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Classical Arabic lexical richness, morphological grammar (Sarf &amp; Nahw), and the beauty of Arabic script.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-emerald-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 9. Korean -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
-            <span>Korean</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 font-semibold">한국어</span>
-          </h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-indigo-100 text-indigo-800 border border-indigo-200">
+                Global Language
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">09</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-indigo-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-yin-yang"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Korean</h4>
+                  <span class="text-xs px-2 py-0.5 rounded-none bg-indigo-100 text-indigo-700 font-semibold border border-indigo-200 font-sans">한국어</span>
+                </div>
+                <span class="text-[11px] text-slate-500 font-sans block">Hangul Challenge &amp; Culture</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Hangul reading, contemporary idioms, sentence comprehension, and modern Korean cultural literacy.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual</span>
+            <span class="text-indigo-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 10. Anime Tales -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Anime Tales</h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-purple-100 text-purple-800 border border-purple-200">
+                Pop Culture &amp; Lore
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">10</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-purple-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-clapperboard"></i>
+              </div>
+              <div>
+                <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Anime Tales</h4>
+                <span class="text-[11px] text-slate-500 font-sans block">Visual Narrative &amp; Storyboards</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Crafting innovative storylines, character narratives, and world-building inspired by the anime &amp; manga universe.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Individual / Team</span>
+            <span class="text-purple-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 11. শব্দ, গল্প, কৃত্য -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900">শব্দ, গল্প, কৃত্য</h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'bangla'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-800 border border-emerald-200">
+                বাচিক শিল্প ও মঞ্চ
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">11</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-microphone-lines"></i>
+              </div>
+              <div>
+                <h4 class="font-bengali text-xl font-bold text-slate-900 leading-snug">শব্দ, গল্প, কৃত্য</h4>
+                <span class="text-[11px] text-slate-500 font-sans block">Recitation, Tale &amp; Performance</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Expressive stage storytelling, rhythmic poetry recitation, and dynamic dramatic monologue presentation.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-regular fa-user text-slate-400"></i> Solo / Duo</span>
+            <span class="text-emerald-700 font-semibold flex items-center gap-1">Day 1 Competition <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
         <!-- 12. Wall Magazine -->
-        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
-          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Wall Magazine</h4>
+        <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex flex-col justify-between p-5 sm:p-6 reveal group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-[10.5px] font-sans font-bold tracking-wider uppercase px-2 py-0.5 rounded-none bg-sky-100 text-sky-800 border border-sky-200">
+                Exhibition &amp; Arts
+              </span>
+              <span class="font-display text-xl text-slate-400 group-hover:text-slate-600 transition-colors">12</span>
+            </div>
+            <div class="flex items-start gap-3 mb-2.5">
+              <div class="w-10 h-10 rounded-none bg-white border border-slate-300 flex items-center justify-center text-sky-700 text-base shadow-sm group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-colors shrink-0">
+                <i class="fa-solid fa-palette"></i>
+              </div>
+              <div>
+                <h4 class="font-sans text-xl font-bold text-slate-900 leading-snug">Wall Magazine</h4>
+                <span class="text-[11px] text-slate-500 font-sans block">Art, Editorial &amp; Display</span>
+              </div>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed font-sans mt-2">
+              Creative handcrafted wall publications combining investigative articles, poems, sketches, and typography.
+            </p>
+          </div>
+          <div class="pt-3.5 mt-3.5 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-sans">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-users text-slate-400"></i> Team (2-3)</span>
+            <span class="text-sky-700 font-semibold flex items-center gap-1">Day 1 Fair <i class="fa-solid fa-arrow-right text-[9px]"></i></span>
+          </div>
         </div>
 
       </div>
