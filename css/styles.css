@@ -37,7 +37,7 @@ body {
   min-height: 100vh;
 }
 
-/* ── HERO SECTION: SUBTLE TEXTURED BACKGROUND WITH INCREASED TRANSPARENCY ── */
+/* ── HERO SECTION: RICH TEXTURED BACKGROUND WITH ENHANCED GRADIENT ── */
 #hero {
   position: relative;
   background-color: #032119;
@@ -49,12 +49,14 @@ body {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(180deg, rgba(3, 33, 25, 0.35) 0%, transparent 40%, rgba(2, 22, 17, 0.55) 100%),
+    radial-gradient(ellipse 70% 60% at 20% 24%, rgba(253, 186, 18, 0.28) 0%, rgba(253, 186, 18, 0.1) 42%, transparent 72%),
+    linear-gradient(180deg, rgba(2, 22, 17, 0.45) 0%, rgba(2, 22, 17, 0.05) 35%, rgba(2, 22, 17, 0.15) 65%, rgba(2, 22, 17, 0.8) 100%),
     url('../assets/images/language-bg.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  opacity: 0.32;
+  filter: contrast(1.18) saturate(1.22);
+  opacity: 1;
   pointer-events: none;
   z-index: 1;
 }
