@@ -116,7 +116,7 @@ body {
   border: 1px solid #cbd5e1;
   background: #eaedf2;
   background-color: #eaedf2;
-  border-radius: 14px;
+  border-radius: 0;
   padding: 24px 28px;
   color: #0f172a;
   transition: all 0.25s ease;
@@ -252,7 +252,7 @@ body {
 .speaker-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 0;
   padding: 16px 12px;
   text-align: center;
   transition: all 0.25s ease;
@@ -283,16 +283,13 @@ body {
 
 /* ── PRIZE POOL CARD ── */
 .prize-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  border: 2px solid #e2e8f0;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 0;
   transition: all 0.25s ease;
 }
 
 .prize-card:hover {
   border-color: #fdba12;
-  box-shadow: 0 10px 30px rgba(253, 186, 18, 0.12);
+  box-shadow: 0 12px 36px rgba(253, 186, 18, 0.2);
 }
 
 
