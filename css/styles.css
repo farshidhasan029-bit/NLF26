@@ -218,3 +218,67 @@ body {
   scrollbar-width: none;
 }
 
+/* ── HERO LOGO BOX (SPEC: White background with box shadow on hover) ── */
+.hero-logo-box {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-logo-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* ── SPEAKER CARDS (LEGACY NLF23 / 24 / 25) ── */
+.speaker-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.speaker-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.speaker-avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 12px auto;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #032119 0%, #059669 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fdba12;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: 3px solid #f1f5f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ── PRIZE POOL CARD ── */
+.prize-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+}
+
+.prize-card:hover {
+  border-color: #fdba12;
+  box-shadow: 0 10px 30px rgba(253, 186, 18, 0.12);
+}
+
+
