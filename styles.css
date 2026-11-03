@@ -1,0 +1,284 @@
+/* ========================================================
+   National Language Fest 2026 (NLF '26 at BAU)
+   Hosted by Bangladesh Agricultural University Language Club (BAULC)
+   Official BAULC Template Layout Stylesheet
+   Constant Multilingual Background & Rounded Capsule Component System
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── BODY (CLEAN WHITE BACKGROUND FOR CONTENT) ── */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  color: #0f172a;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* ── HERO SECTION: PRESERVE MULTILINGUAL ARTWORK BACKGROUND ── */
+#hero {
+  background-color: #032119;
+  background-image: 
+    radial-gradient(circle at center, rgba(3, 33, 25, 0.30) 0%, rgba(2, 22, 17, 0.55) 100%),
+    url('../assets/images/language-bg.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+}
+
+.font-display {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.font-bengali {
+  font-family: 'Hind Siliguri', 'Inter', sans-serif;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+  background: rgba(2, 22, 17, 0.90) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.navbar.solid {
+  background: rgba(2, 22, 17, 0.98) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+/* ── MOBILE MENU DROPDOWN ── */
+.mobile-menu-dropdown {
+  background: #021711 !important;
+  background-color: #021711 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65) !important;
+  position: relative;
+  z-index: 55;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+/* ── REFINED COMPONENT SYSTEM (ELEGANT LIGHT THEME) ── */
+.template-pill {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #0f172a;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.template-pill:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.template-card {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px 28px;
+  color: #0f172a;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.template-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ── BUTTONS ── */
+.btn-gold {
+  background: #fdba12;
+  color: #0b1511;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-gold:hover {
+  background: #f1b00e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(253, 186, 18, 0.3);
+}
+
+.btn-outline-white {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-outline-white:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+/* ── BACK TO TOP BUTTON ── */
+#backToTop {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #0f172a;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+#backToTop.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#backToTop:hover {
+  background: #fdba12;
+  color: #0b1511;
+  border-color: #fdba12;
+  transform: translateY(-2px);
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── NO SCROLLBAR UTILITY ── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── HERO LOGO BOX (SPEC: White background with box shadow on hover) ── */
+.hero-logo-box {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-logo-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+}
+
+/* ── SPEAKER CARDS (LEGACY NLF23 / 24 / 25) ── */
+.speaker-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 12px;
+  text-align: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.speaker-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.speaker-avatar {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 12px auto;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #032119 0%, #059669 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fdba12;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: 3px solid #f1f5f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ── PRIZE POOL CARD ── */
+.prize-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+}
+
+.prize-card:hover {
+  border-color: #fdba12;
+  box-shadow: 0 10px 30px rgba(253, 186, 18, 0.12);
+}
+
+

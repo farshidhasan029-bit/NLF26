@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Language Fest 2026 | NLF BAU 2026 - Hosted by BAULC</title>
+  <meta name="description" content="National Language Fest 2026 (NLF '26) organized by Bangladesh Agricultural University Language Club (BAULC) at BAU, Mymensingh.">
+  <link rel="icon" type="image/png" href="assets/logos/nlf_logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script>
+    const originalWarn = console.warn;
+    console.warn = function(msg) {
+      if (typeof msg === 'string' && msg.includes('cdn.tailwindcss.com should not be used in production')) return;
+      originalWarn.apply(console, arguments);
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Bebas Neue', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            bengali: ['Hind Siliguri', 'sans-serif'],
+          },
+          colors: {
+            fest: {
+              emerald: '#059669',
+              dark: '#032119',
+              gold: '#fdba12',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="selection:bg-[#fdba12] selection:text-black">
+
+  <!-- ======================================================== -->
+  <!-- 1. STICKY HEADER & NAVBAR (PAGE 1 SPEC)                  -->
+  <!-- ======================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50" x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false">
+    <nav id="navbar" class="navbar border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16 w-full">
+          
+          <!-- Main BAULC Logo & Brand Title -->
+          <a href="#hero" class="flex items-center gap-3 group" @click="mobileMenuOpen = false">
+            <img src="assets/logos/baulc_logo.png" alt="Bangladesh Agricultural University Language Club" class="h-10 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105 duration-200">
+            <div class="flex flex-col">
+              <span class="text-white font-display text-xl tracking-wide group-hover:text-[#fdba12] transition-colors leading-none">
+                NLF BAU <span class="text-[#fdba12]">2026</span>
+              </span>
+              <span class="text-white/60 text-[10px] font-sans tracking-wide">BAU Language Club</span>
+            </div>
+          </a>
+
+          <!-- Desktop Menu (Exactly matching wireframe: About, Timeline, Segments, Process, Legacy, Contact) -->
+          <div class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-sans font-medium text-white/80">
+            <a href="#about" class="hover:text-[#fdba12] transition-colors">About</a>
+            <a href="#timeline" class="hover:text-[#fdba12] transition-colors">Timeline</a>
+            <a href="#segments" class="hover:text-[#fdba12] transition-colors">Segments</a>
+            <a href="#process" class="hover:text-[#fdba12] transition-colors">Process</a>
+            <a href="#legacy" class="hover:text-[#fdba12] transition-colors">Legacy</a>
+            <a href="#contact" class="hover:text-[#fdba12] transition-colors">Contact</a>
+          </div>
+
+          <!-- Desktop CTA -->
+          <div class="hidden md:flex items-center gap-4">
+            <a href="#process" class="btn-gold text-xs px-5 py-2 uppercase tracking-wider font-bold">
+              Register
+            </a>
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                  id="mobileHamburgerBtn"
+                  class="md:hidden text-white/80 hover:text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-[#fdba12]/40 transition-colors" 
+                  aria-label="Toggle navigation menu">
+            <i x-show="!mobileMenuOpen" class="fa-solid fa-bars text-lg"></i>
+            <i x-show="mobileMenuOpen" x-cloak class="fa-solid fa-xmark text-lg text-[#fdba12]"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sleek Mobile Navigation Dropdown -->
+    <div id="mobile-menu" 
+         x-show="mobileMenuOpen" 
+         x-cloak
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 -translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 -translate-y-2"
+         @click.outside="mobileMenuOpen = false"
+         class="md:hidden mobile-menu-dropdown border-b border-white/10 shadow-2xl">
+      <div class="max-w-7xl mx-auto px-5 py-4 flex flex-col space-y-1 font-sans text-sm font-medium">
+        <a href="#about" @click="mobileMenuOpen = false" class="mobile-nav-link flex items-center justify-between px-3 py-2.5 rounded text-white/85 hover:text-white hover:bg-white/5 transition-colors">
+          <span>About</span>
+          <i class="fa-solid fa-chevron-right text-[10px] text-white/30"></i>
+        </a>
+        <a href="#timeline" @click="mobileMenuOpen = false" class="mobile-nav-link flex items-center justify-between px-3 py-2.5 rounded text-white/85 hover:text-white hover:bg-white/5 transition-colors">
+          <span>Timeline</span>
+          <i class="fa-solid fa-chevron-right text-[10px] text-white/30"></i>
+        </a>
+        <a href="#segments" @click="mobileMenuOpen = false" class="mobile-nav-link flex items-center justify-between px-3 py-2.5 rounded text-white/85 hover:text-white hover:bg-white/5 transition-colors">
+          <span>Segments</span>
+          <i class="fa-solid fa-chevron-right text-[10px] text-white/30"></i>
+        </a>
+        <a href="#process" @click="mobileMenuOpen = false" class="mobile-nav-link flex items-center justify-between px-3 py-2.5 rounded text-white/85 hover:text-white hover:bg-white/5 transition-colors">
+          <span>Process</span>
+          <i class="fa-solid fa-chevron-right text-[10px] text-white/30"></i>
+        </a>
+        <a href="#legacy" @click="mobileMenuOpen = false" class="mobile-nav-link flex items-center justify-between px-3 py-2.5 rounded text-white/85 hover:text-white hover:bg-white/5 transition-colors">
+          <span>Legacy</span>
+          <i class="fa-solid fa-chevron-right text-[10px] text-white/30"></i>
+        </a>
+        <a href="#contact" @click="mobileMenuOpen = false" class="mobile-nav-link flex items-center justify-between px-3 py-2.5 rounded text-white/85 hover:text-white hover:bg-white/5 transition-colors">
+          <span>Contact</span>
+          <i class="fa-solid fa-chevron-right text-[10px] text-white/30"></i>
+        </a>
+
+        <div class="pt-3 pb-1">
+          <a href="#process" @click="mobileMenuOpen = false" class="btn-gold flex items-center justify-center w-full text-xs py-2.5 uppercase tracking-wider font-bold shadow-md">
+            Register
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 2. HERO SECTION (PAGE 1 SPEC)                            -->
+  <!-- ======================================================== -->
+  <section id="hero" class="min-h-[85vh] flex flex-col justify-center relative pt-28 sm:pt-36 pb-16 sm:pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+        <!-- Left Column: Display Title, Paragraph, and 2 Buttons -->
+        <div class="lg:col-span-7 reveal">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fdba12]/15 border border-[#fdba12]/30 text-[#fdba12] text-xs font-semibold tracking-wide mb-5 font-sans">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>BAU LANGUAGE CLUB &bull; NOVEMBER 2026</span>
+          </div>
+
+          <!-- Stacked Headline Exactly Matching Wireframe -->
+          <h1 class="font-display text-white text-5xl sm:text-6xl lg:text-7xl xl:text-8xl leading-[0.95] mb-5 tracking-wide" style="text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);">
+            National<br>
+            Language<br>
+            Fest<br>
+            <span class="text-[#fdba12]">2026</span>
+          </h1>
+
+          <!-- Exact Copy from Specification -->
+          <p class="text-white/90 text-base sm:text-lg leading-relaxed max-w-xl mb-7 font-sans" style="text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);">
+            Bangladesh Agricultural University Language Club proudly announces the forthcoming National Language Fest 2026 - a celebration of linguistic brilliance and cultural harmony.
+          </p>
+
+          <!-- Register and Details Buttons -->
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#process" class="btn-gold px-8 py-3 text-xs sm:text-sm uppercase tracking-wider font-bold shadow-lg">
+              Register
+            </a>
+            <a href="#about" class="btn-outline-white px-8 py-3 text-xs sm:text-sm uppercase tracking-wider font-semibold">
+              Details
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Logo Box (White bg with hover shadow) & Countdown Clock -->
+        <div class="lg:col-span-5 flex flex-col gap-5 justify-center lg:justify-end reveal" style="transition-delay: 0.1s;">
+          
+          <!-- Box 1: nlf-logo.png on White background with box shadow on hover (PAGE 1 SPEC) -->
+          <div class="hero-logo-box p-6 sm:p-7 w-full max-w-md mx-auto lg:mr-0">
+            <img src="assets/logos/nlf_logo.png" alt="National Language Fest 2026 Official Logo" class="w-full max-h-56 sm:max-h-64 object-contain">
+          </div>
+
+          <!-- Box 2: Live Countdown Clock -->
+          <div class="w-full max-w-md mx-auto lg:mr-0 rounded-2xl border border-white/15 bg-black/45 backdrop-blur-md p-6 sm:p-7 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
+              <div class="flex items-center gap-2 text-white/90 text-xs font-semibold tracking-wider uppercase font-sans">
+                <i class="fa-regular fa-clock text-[#fdba12]"></i>
+                <span>Countdown Clock</span>
+              </div>
+              <span class="text-[10px] uppercase font-semibold px-2.5 py-0.5 rounded-full bg-[#fdba12]/20 text-[#fdba12] border border-[#fdba12]/30 font-sans">Fest Opening</span>
+            </div>
+
+            <div x-data="countdown()">
+              <div class="grid grid-cols-4 gap-2.5 sm:gap-3">
+                <div class="bg-white/[0.06] border border-white/10 rounded-xl py-3 px-2 text-center">
+                  <div class="font-bold text-white text-2xl sm:text-3xl leading-none mb-1 font-sans" x-text="days">00</div>
+                  <div class="text-white/50 text-[10px] font-medium tracking-wider uppercase font-sans">Days</div>
+                </div>
+                <div class="bg-white/[0.06] border border-white/10 rounded-xl py-3 px-2 text-center">
+                  <div class="font-bold text-white text-2xl sm:text-3xl leading-none mb-1 font-sans" x-text="hours">00</div>
+                  <div class="text-white/50 text-[10px] font-medium tracking-wider uppercase font-sans">Hours</div>
+                </div>
+                <div class="bg-white/[0.06] border border-white/10 rounded-xl py-3 px-2 text-center">
+                  <div class="font-bold text-white text-2xl sm:text-3xl leading-none mb-1 font-sans" x-text="minutes">00</div>
+                  <div class="text-white/50 text-[10px] font-medium tracking-wider uppercase font-sans">Mins</div>
+                </div>
+                <div class="bg-white/[0.06] border border-white/10 rounded-xl py-3 px-2 text-center">
+                  <div class="font-bold text-white text-2xl sm:text-3xl leading-none mb-1 font-sans" x-text="seconds">00</div>
+                  <div class="text-white/50 text-[10px] font-medium tracking-wider uppercase font-sans">Secs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 3. ABOUT SECTION (PAGE 2 SPEC)                           -->
+  <!-- ======================================================== -->
+  <section id="about" class="py-20 relative z-10 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Display Title -->
+      <div class="max-w-4xl mb-10 reveal">
+        <h2 class="font-display text-5xl sm:text-6xl text-slate-900 leading-tight mb-4 tracking-wide">
+          ABOUT THE EVENT
+        </h2>
+        <p class="text-slate-700 text-base sm:text-lg leading-relaxed font-sans">
+          This grand event welcomes not only students of Bangladesh Agricultural University but also participants from universities across the country, uniting language enthusiasts under one platform and providing them with a unique opportunity to develop into the world of language. Guided by the motto <strong>Exploring the World of Language</strong> the fest is structured into three distinct parts:
+        </p>
+      </div>
+
+      <!-- 3 Numbered Milestone Cards -->
+      <div class="space-y-4 mb-14 max-w-4xl reveal">
+        <div class="border border-slate-200 bg-slate-50 hover:bg-slate-100/70 rounded-xl p-5 flex items-start gap-4 transition-all shadow-sm">
+          <span class="font-display text-2xl sm:text-3xl text-emerald-700 leading-none min-w-[28px]">1.</span>
+          <p class="font-sans text-base sm:text-lg font-semibold text-slate-900 pt-0.5">
+            A language-based competition
+          </p>
+        </div>
+
+        <div class="border border-slate-200 bg-slate-50 hover:bg-slate-100/70 rounded-xl p-5 flex items-start gap-4 transition-all shadow-sm">
+          <span class="font-display text-2xl sm:text-3xl text-emerald-700 leading-none min-w-[28px]">2.</span>
+          <p class="font-sans text-base sm:text-lg font-semibold text-slate-900 pt-0.5">
+            Fair- Comprises of Art, Literature &amp; Culture
+          </p>
+        </div>
+
+        <div class="border border-slate-200 bg-slate-50 hover:bg-slate-100/70 rounded-xl p-5 flex items-start gap-4 transition-all shadow-sm">
+          <span class="font-display text-2xl sm:text-3xl text-emerald-700 leading-none min-w-[28px]">3.</span>
+          <p class="font-sans text-base sm:text-lg font-semibold text-slate-900 pt-0.5">
+            Interactive sessions with renowned speakers who will share their insights and experiences.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 Statistics Counters Exactly from Wireframe -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16 reveal">
+        <div class="border border-slate-200 bg-slate-50 rounded-xl py-6 px-4 text-center shadow-sm">
+          <div class="font-display text-4xl sm:text-5xl text-slate-900 stat-number" data-target="3000" data-suffix="+">3,000+</div>
+          <div class="text-slate-600 text-xs sm:text-sm font-sans uppercase tracking-wider mt-2 font-semibold">Participants</div>
+        </div>
+        <div class="border border-slate-200 bg-slate-50 rounded-xl py-6 px-4 text-center shadow-sm">
+          <div class="font-display text-4xl sm:text-5xl text-slate-900 stat-number" data-target="10" data-suffix="+">10+</div>
+          <div class="text-slate-600 text-xs sm:text-sm font-sans uppercase tracking-wider mt-2 font-semibold">Segments</div>
+        </div>
+        <div class="border border-slate-200 bg-slate-50 rounded-xl py-6 px-4 text-center shadow-sm">
+          <div class="font-display text-4xl sm:text-5xl text-slate-900 stat-number" data-target="30" data-suffix="+">30+</div>
+          <div class="text-slate-600 text-xs sm:text-sm font-sans uppercase tracking-wider mt-2 font-semibold">Universities</div>
+        </div>
+        <div class="border border-slate-200 bg-slate-50 rounded-xl py-6 px-4 text-center shadow-sm">
+          <div class="font-display text-4xl sm:text-5xl text-slate-900">2 DAYS</div>
+          <div class="text-slate-600 text-xs sm:text-sm font-sans uppercase tracking-wider mt-2 font-semibold">Long Event</div>
+        </div>
+      </div>
+
+      <!-- PRIZE POOL (PAGE 2 SPEC) -->
+      <div class="max-w-4xl mx-auto reveal">
+        <div class="text-center mb-6">
+          <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+            PRIZE POOL
+          </h3>
+        </div>
+
+        <div class="prize-card p-8 sm:p-10 text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 text-amber-700 text-2xl mb-4 shadow-sm">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <p class="text-slate-800 text-base sm:text-xl leading-relaxed font-sans max-w-2xl mx-auto font-medium">
+            The Winners of the National Language Fest 2026 will receive a Prize Pool of <span class="font-bold text-amber-700 text-xl sm:text-2xl">45000 BDT</span>. Along with the Prize Money, they will also receive a Medal and certificate.
+          </p>
+          <div class="mt-6 flex items-center justify-center gap-6 text-xs sm:text-sm font-sans font-semibold text-slate-600">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-money-bill-wave text-emerald-600"></i> Cash Prize</span>
+            <span class="text-slate-300">&bull;</span>
+            <span class="flex items-center gap-2"><i class="fa-solid fa-medal text-amber-600"></i> Official Medal</span>
+            <span class="text-slate-300">&bull;</span>
+            <span class="flex items-center gap-2"><i class="fa-solid fa-certificate text-sky-600"></i> Certificate</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. TIMELINE SECTION (PAGE 3 SPEC)                        -->
+  <!-- ======================================================== -->
+  <section id="timeline" class="py-20 relative z-10 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <!-- DISPLAY TITLE -->
+      <h2 class="font-display text-6xl sm:text-7xl lg:text-8xl text-slate-900 tracking-wide mb-12 reveal">
+        TIMELINE
+      </h2>
+
+      <!-- Exact Day 1 / Day 2 Structure from Page 3 Wireframe -->
+      <div class="space-y-6 max-w-2xl mx-auto text-left">
+        
+        <!-- Day 1 Block -->
+        <div class="reveal">
+          <div class="font-display text-3xl sm:text-4xl text-slate-900 tracking-wide mb-3 flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
+            <span>Day 1</span>
+          </div>
+          <div class="space-y-3">
+            <div class="border border-slate-200 bg-white hover:bg-slate-100/80 rounded-xl p-4 text-center font-sans font-bold text-base sm:text-lg text-slate-800 shadow-sm transition-colors">
+              Competition
+            </div>
+            <div class="border border-slate-200 bg-white hover:bg-slate-100/80 rounded-xl p-4 text-center font-sans font-bold text-base sm:text-lg text-slate-800 shadow-sm transition-colors">
+              Fair
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 2 Block -->
+        <div class="reveal pt-4">
+          <div class="font-display text-3xl sm:text-4xl text-slate-900 tracking-wide mb-3 flex items-center gap-3">
+            <span class="w-3 h-3 rounded-full bg-amber-600"></span>
+            <span>Day 2</span>
+          </div>
+          <div class="space-y-3">
+            <div class="border border-slate-200 bg-white hover:bg-slate-100/80 rounded-xl p-4 text-center font-sans font-bold text-base sm:text-lg text-slate-800 shadow-sm transition-colors">
+              Session
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 5. SEGMENTS SECTION (PAGE 3 SPEC: 12 SEGMENTS 3x4 GRID)  -->
+  <!-- ======================================================== -->
+  <section id="segments" class="py-20 relative z-10 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-14 reveal">
+        <h2 class="font-display text-6xl sm:text-7xl lg:text-8xl text-slate-900 leading-tight mb-3 tracking-wide">
+          SEGMENTS
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base font-sans max-w-xl mx-auto">
+          Explore the twelve signature competition and exhibition categories of National Language Fest 2026.
+        </p>
+      </div>
+
+      <!-- 12 SEGMENTS (EXACT 3x4 GRID FROM SPECIFICATION) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        
+        <!-- 1. সাহিত্যোৎসব -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900">সাহিত্যোৎসব</h4>
+        </div>
+
+        <!-- 2. ব্যাকরণ ব্যঞ্জন -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900">ব্যাকরণ ব্যঞ্জন</h4>
+        </div>
+
+        <!-- 3. Fiction Fusion -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Fiction Fusion</h4>
+        </div>
+
+        <!-- 4. Connecting the dots -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Connecting the dots</h4>
+        </div>
+
+        <!-- 5. Japanese -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>Japanese</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 font-semibold">日本語</span>
+          </h4>
+        </div>
+
+        <!-- 6. Spanish -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>Spanish</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-semibold">Español</span>
+          </h4>
+        </div>
+
+        <!-- 7. German -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>German</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 font-semibold">Deutsch</span>
+          </h4>
+        </div>
+
+        <!-- 8. Arabic -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>Arabic</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">العربية</span>
+          </h4>
+        </div>
+
+        <!-- 9. Korean -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+            <span>Korean</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 font-semibold">한국어</span>
+          </h4>
+        </div>
+
+        <!-- 10. Anime Tales -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Anime Tales</h4>
+        </div>
+
+        <!-- 11. শব্দ, গল্প, কৃত্য -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900">শব্দ, গল্প, কৃত্য</h4>
+        </div>
+
+        <!-- 12. Wall Magazine -->
+        <div class="template-card flex items-center justify-center text-center p-6 min-h-[100px] reveal">
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900">Wall Magazine</h4>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 6. PROCESS & REGISTRATION (PAGE 4 SPEC)                  -->
+  <!-- ======================================================== -->
+  <section id="process" class="py-20 relative z-10 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Title & Subtitle -->
+      <div class="max-w-3xl mb-12 reveal">
+        <h2 class="font-display text-5xl sm:text-6xl text-slate-900 leading-tight mb-2 tracking-wide">
+          PROCESS
+        </h2>
+        <p class="text-slate-600 text-base font-sans">
+          3-step registration process for National Language Fest 2026.
+        </p>
+      </div>
+
+      <!-- 3-Step Milestone Progression -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 reveal">
+        
+        <!-- Step 1 -->
+        <div class="border border-slate-200 bg-white rounded-xl p-6 shadow-sm">
+          <span class="text-xs font-sans font-bold text-amber-700 uppercase tracking-wider">STEP 01</span>
+          <h4 class="font-display text-2xl text-slate-900 mt-2 mb-1">COMPLETE FORM</h4>
+          <p class="text-slate-600 text-sm leading-relaxed font-sans">Fill out the registration form with your information.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="border border-slate-200 bg-white rounded-xl p-6 shadow-sm">
+          <span class="text-xs font-sans font-bold text-amber-700 uppercase tracking-wider">STEP 02</span>
+          <h4 class="font-display text-2xl text-slate-900 mt-2 mb-1">GRAB YOUR PASS</h4>
+          <p class="text-slate-600 text-sm leading-relaxed font-sans">Complete registration and collect your digital festival pass.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="border border-slate-200 bg-white rounded-xl p-6 shadow-sm">
+          <span class="text-xs font-sans font-bold text-amber-700 uppercase tracking-wider">STEP 03</span>
+          <h4 class="font-display text-2xl text-slate-900 mt-2 mb-1">JOIN EVENT</h4>
+          <p class="text-slate-600 text-sm leading-relaxed font-sans">Join the National Language Fest and enjoy the event.</p>
+        </div>
+
+      </div>
+
+      <!-- Eligibility Guidelines & Ready to Compete Grid -->
+      <div class="grid lg:grid-cols-2 gap-8 items-stretch mb-16">
+        
+        <!-- Left: ELIGIBILITY GUIDELINES -->
+        <div class="border border-slate-200 bg-white rounded-xl p-7 shadow-sm reveal space-y-4">
+          <h3 class="font-display text-3xl text-slate-900 tracking-wide mb-3">ELIGIBILITY GUIDELINES</h3>
+          <div class="flex items-start gap-3.5">
+            <i class="fa-solid fa-circle-check text-emerald-600 text-base mt-0.5"></i>
+            <p class="text-slate-700 text-sm leading-relaxed font-sans">Students currently enrolled in any university or college can participate.</p>
+          </div>
+          <div class="flex items-start gap-3.5">
+            <i class="fa-solid fa-circle-check text-emerald-600 text-base mt-0.5"></i>
+            <p class="text-slate-700 text-sm leading-relaxed font-sans">Participants must provide valid institutional information during registration.</p>
+          </div>
+          <div class="flex items-start gap-3.5">
+            <i class="fa-solid fa-circle-check text-emerald-600 text-base mt-0.5"></i>
+            <p class="text-slate-700 text-sm leading-relaxed font-sans">Students can participate individually or as a team, depending on the segment.</p>
+          </div>
+        </div>
+
+        <!-- Right: READY TO COMPETE? -->
+        <div class="border border-slate-200 bg-white rounded-xl p-7 shadow-sm reveal text-center flex flex-col justify-center" style="transition-delay: 0.1s;">
+          <h3 class="font-display text-3xl text-slate-900 tracking-wide mb-2">READY TO COMPETE?</h3>
+          <p class="text-slate-600 text-sm font-sans mb-6">Registration is now open for National Language Fest 2026</p>
+          
+          <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" class="btn-gold w-full justify-center py-3.5 text-xs sm:text-sm uppercase font-sans tracking-wider font-bold shadow">
+            OPEN REGISTRATION PORTAL
+          </a>
+        </div>
+
+      </div>
+
+      <!-- FREQUENTLY ASKED QUESTIONS (PAGE 4 SPEC) -->
+      <div class="max-w-3xl mx-auto reveal">
+        <div class="text-center mb-8">
+          <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+            Frequently Asked Questions
+          </h3>
+        </div>
+
+        <div class="space-y-4 font-sans" x-data="{ active: 1 }">
+          
+          <!-- Q1 -->
+          <div class="border border-slate-200 bg-white rounded-xl overflow-hidden shadow-sm">
+            <button @click="active = (active === 1 ? null : 1)" class="w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-slate-900 hover:text-emerald-700 transition-colors">
+              <span class="flex items-center gap-3">
+                <i class="fa-solid fa-caret-down text-emerald-600 transition-transform" :class="active === 1 ? 'rotate-180' : ''"></i>
+                <span>When will National Language Fest 2026 take place?</span>
+              </span>
+            </button>
+            <div x-show="active === 1" x-collapse class="px-6 pb-5 pt-1 text-slate-600 text-sm leading-relaxed border-t border-slate-100">
+              The final date will be announced soon.
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="border border-slate-200 bg-white rounded-xl overflow-hidden shadow-sm">
+            <button @click="active = (active === 2 ? null : 2)" class="w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-slate-900 hover:text-emerald-700 transition-colors">
+              <span class="flex items-center gap-3">
+                <i class="fa-solid fa-caret-down text-emerald-600 transition-transform" :class="active === 2 ? 'rotate-180' : ''"></i>
+                <span>Where will the festival take place?</span>
+              </span>
+            </button>
+            <div x-show="active === 2" x-collapse class="px-6 pb-5 pt-1 text-slate-600 text-sm leading-relaxed border-t border-slate-100">
+              The festival will take place at Bangladesh Agricultural University. Add the exact venue when confirmed.
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="border border-slate-200 bg-white rounded-xl overflow-hidden shadow-sm">
+            <button @click="active = (active === 3 ? null : 3)" class="w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-slate-900 hover:text-emerald-700 transition-colors">
+              <span class="flex items-center gap-3">
+                <i class="fa-solid fa-caret-down text-emerald-600 transition-transform" :class="active === 3 ? 'rotate-180' : ''"></i>
+                <span>How can I participate?</span>
+              </span>
+            </button>
+            <div x-show="active === 3" x-collapse class="px-6 pb-5 pt-1 text-slate-600 text-sm leading-relaxed border-t border-slate-100">
+              Participation details and instructions will be announced by the organizers.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 7. LEGACY SECTION (PAGES 5, 6, 7, 8 SPEC)                -->
+  <!-- ======================================================== -->
+  <section id="legacy" class="py-20 relative z-10 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Super-Header -->
+      <div class="text-center mb-16 reveal">
+        <span class="text-xs uppercase font-sans font-semibold tracking-widest text-emerald-700">
+          History &bull; Heritage &bull; Impact
+        </span>
+        <h2 class="font-display text-6xl sm:text-7xl lg:text-8xl text-slate-900 leading-tight mb-3 tracking-wide">
+          LEGACY OF NLF
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base font-sans max-w-xl mx-auto">
+          From its inception in 2018 to nationwide editions, explore the journey of BAULC and the National Language Fest.
+        </p>
+      </div>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- 7.1 MEET THE HOST (PAGE 5 SPEC)                      -->
+      <!-- ---------------------------------------------------- -->
+      <div class="max-w-4xl mx-auto mb-20 reveal">
+        <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
+          
+          <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
+            <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+              MEET THE HOST
+            </h3>
+          </div>
+
+          <!-- baulc-prothom-alo-image.jpg -->
+          <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
+            <img src="assets/images/baulc-prothom-alo-image.jpg" alt="BAULC Featured on Prothom Alo" class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
+              <span class="flex items-center gap-1.5 font-medium text-slate-800">
+                <i class="fa-solid fa-newspaper text-rose-600"></i>
+                <span>Prothom Alo Feature &bull; 21/09/2025</span>
+              </span>
+              <span class="text-[11px] text-slate-500">বাংলাদেশ কৃষি বিশ্ববিদ্যালয় ল্যাঙ্গুয়েজ ক্লাব &bull; National Media</span>
+            </div>
+          </div>
+
+          <!-- Description from Wireframe -->
+          <div class="p-6 sm:p-8">
+            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify">
+              Bangladesh Agricultural University Language Club (BAULC) is a non-profit organization that embarked on its journey in 2018. The club is guided by the motto of exploring the world of language and is dedicated to nurturing the communication and linguistic proficiencies of students within the BAU campus. In pursuit of this goal, BAULC regularly organizes monthly presentation events on diverse subjects, providing students with opportunities to cultivate their presentation skills. Furthermore, it hosts workshops &amp; sessions on various topics, aiding students in refining their soft skills. The club also coordinates an array of language based competitions among the student body. With an Executive Committee comprising more than 60 members, BAULC is resolutely committed to preparing students for a brighter future and equipping them to confront the forthcoming challenges with confidence.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- 7.2 NLF23 (PAGE 6 SPEC)                              -->
+      <!-- ---------------------------------------------------- -->
+      <div class="max-w-4xl mx-auto mb-20 reveal">
+        <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
+          
+          <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
+            <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+              NLF23
+            </h3>
+            <span class="text-xs uppercase font-sans font-semibold tracking-wider text-emerald-700">Inaugural Edition &bull; 2023</span>
+          </div>
+
+          <!-- nlf23-image.jpg -->
+          <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
+            <img src="assets/images/nlf23-image.jpg" alt="National Language Fest 2023 Stage & Participants" class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
+              <span class="flex items-center gap-1.5 font-medium text-slate-800">
+                <i class="fa-solid fa-camera text-emerald-600"></i>
+                <span>National Language Fest 2023 &bull; Grand Gala</span>
+              </span>
+              <span class="text-[11px] text-slate-500">BAU Central Auditorium Stage</span>
+            </div>
+          </div>
+
+          <!-- Description from Wireframe -->
+          <div class="p-6 sm:p-8">
+            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
+              The National Language Fest 2023 hosted by the Bangladesh Agricultural University Language Club, was a groundbreaking two-day celebration of languages and cultures. Organized for the very first time, it marked a historic moment as Bangladesh Agricultural University witnessed such a unique and dynamic linguistic festival on its campus. Open to students nationwide, the event featured language-based competitions and insightful sessions conducted by expert speakers. Participants engaged in script writing, cultural performances, vocabulary challenges and linguistic explorations across Bangla, English, Japanese, French and Nepali. The second day offered practical skill-building workshops on IELTS, public speaking and email writing, culminating in a grand prize-giving ceremony that celebrated talent, creativity, and the power of expression.
+            </p>
+
+            <!-- Keynote Speakers of NLF23 -->
+            <div class="border-t border-slate-200 pt-6">
+              <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
+                Keynote Speakers of NLF23
+              </h4>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <!-- Selina Hossain -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/selina-hossain.jpg" alt="Selina Hossain" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Selina Hossain</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Scholar</div>
+                </div>
+
+                <!-- Kamrul Hasan Kamu -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/kamrul-hasan-kamu.jpg" alt="Kamrul Hasan Kamu" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Kamrul Hasan Kamu</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Linguist &amp; Speaker</div>
+                </div>
+
+                <!-- Rafsan Sabab -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/rafsan-sabab.jpg" alt="Rafsan Sabab" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Rafsan Sabab</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Presenter &amp; Host</div>
+                </div>
+
+                <!-- Tasnim Binta Haque -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/tasnim-binta-haque.jpg" alt="Tasnim Binta Haque" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Tasnim Binta Haque</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Corporate Trainer</div>
+                </div>
+
+                <!-- Engg. Tasin Islam -->
+                <div class="speaker-card col-span-2 sm:col-span-1 flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/engg-tasin-islam.jpg" alt="Engg. Tasin Islam" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Engg. Tasin Islam</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Leader</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- 7.3 NLF24 (PAGE 7 SPEC)                              -->
+      <!-- ---------------------------------------------------- -->
+      <div class="max-w-4xl mx-auto mb-20 reveal">
+        <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
+          
+          <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
+            <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+              NLF24
+            </h3>
+            <span class="text-xs uppercase font-sans font-semibold tracking-wider text-amber-700">BRAC Bank Presents &bull; 2024</span>
+          </div>
+
+          <!-- nlf24-image.jpg -->
+          <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
+            <img src="assets/images/nlf24-image.jpg" alt="BRAC Bank Presents National Language Fest 2024 Stage & Delegation" class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
+              <span class="flex items-center gap-1.5 font-medium text-slate-800">
+                <i class="fa-solid fa-camera text-amber-600"></i>
+                <span>BRAC Bank Presents NLF 2024 &bull; Grand Stage</span>
+              </span>
+              <span class="text-[11px] text-slate-500">BAU Central Auditorium</span>
+            </div>
+          </div>
+
+          <!-- Description from Wireframe -->
+          <div class="p-6 sm:p-8">
+            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
+              BRAC Bank Presents National Language Fest 2024 organized by the Bangladesh Agricultural University Language Club was an even more vibrant and impactful celebration following the success of its debut edition in 2023. The fest featured an expanded range of intellectual and cultural competitions designed to celebrate the beauty and power of language through creativity, communication and critical thinking. Esteemed speakers, language professionals and industry experts conducted engaging sessions that enriched participants with practical knowledge and inspiration. With stronger nationwide reach, enhanced event design and amplified youth engagement, BRAC Bank Presents National Language Fest 2024 became a remarkable platform where passion met purpose and language built connections beyond boundaries.
+            </p>
+
+            <!-- Keynote Speakers of NLF24 -->
+            <div class="border-t border-slate-200 pt-6">
+              <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
+                Keynote Speakers of NLF24
+              </h4>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
+                <!-- Kingkor Ahsan -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/kingkor-ahsan.jpg" alt="Kingkor Ahsan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Kingkor Ahsan</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Novelist</div>
+                </div>
+
+                <!-- Rawnak Hasan -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/rawnak-hasan.jpg" alt="Rawnak Hasan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Rawnak Hasan</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Actor &amp; Director</div>
+                </div>
+
+                <!-- Mashfiq Enam Turjo -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/mashfiq-enam-turjo.jpg" alt="Mashfiq Enam Turjo" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Mashfiq Enam Turjo</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Orator &amp; Educator</div>
+                </div>
+
+                <!-- Limon Hasan -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/limon-hasan.jpg" alt="Limon Hasan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Limon Hasan</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Icon</div>
+                </div>
+
+                <!-- Noor Jannat Meem -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/noor-jannat-meem.jpg" alt="Noor Jannat Meem" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Noor Jannat Meem</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Icon</div>
+                </div>
+
+                <!-- Md. Ayman Noor -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/md-ayman-noor.jpg" alt="Md. Ayman Noor" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Md. Ayman Noor</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Skills Mentor</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- 7.4 NLF25 (PAGE 8 SPEC)                              -->
+      <!-- ---------------------------------------------------- -->
+      <div class="max-w-4xl mx-auto reveal">
+        <div class="border border-slate-200 bg-slate-50 rounded-2xl overflow-hidden shadow-sm">
+          
+          <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
+            <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+              NLF25
+            </h3>
+            <span class="text-xs uppercase font-sans font-semibold tracking-wider text-emerald-700">Bornokunjo Edition &bull; 2025</span>
+          </div>
+
+          <!-- nlf25-image.jpg -->
+          <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
+            <img src="assets/images/nlf25-image.jpg" alt="National Language Fest 2025 Delegation & Bornokunjo" class="w-full h-auto rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
+              <span class="flex items-center gap-1.5 font-medium text-slate-800">
+                <i class="fa-solid fa-camera text-emerald-600"></i>
+                <span>National Language Fest 2025 &bull; Bornokunjo Edition</span>
+              </span>
+              <span class="text-[11px] text-slate-500">Session &amp; Award Ceremony Stage</span>
+            </div>
+          </div>
+
+          <!-- Description from Wireframe -->
+          <div class="p-6 sm:p-8">
+            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
+              National Language Fest 2025 organized by the Bangladesh Agricultural University Language Club was another addition to the vibrant and impactful celebration following the success of its predecessors in 2023 and 2024. The fest featured an expanded range of intellectual and cultural competitions designed to celebrate the beauty and power of language through creativity, communication and critical thinking. With the addition of Bornokunjo, our newest segment the fest achieved new heights. Esteemed speakers, language professionals and industry experts conducted engaging sessions that enriched participants with practical knowledge and inspiration. With stronger nationwide reach, enhanced event design and amplified youth engagement, National Language Fest 2025 became a remarkable platform where passion met purpose and language built connections beyond boundaries.
+            </p>
+
+            <!-- Keynote Speakers of NLF25 -->
+            <div class="border-t border-slate-200 pt-6">
+              <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
+                Keynote Speakers of NLF25
+              </h4>
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <!-- Sadat Hossain -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/sadat-hossain.jpg" alt="Sadat Hossain" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Sadat Hossain</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Filmmaker</div>
+                </div>
+
+                <!-- Shahnawaz Hossain Jay -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/shahnawaz-hossain-jay.jpg" alt="Shahnawaz Hossain Jay" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Shahnawaz Hossain Jay</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Leader</div>
+                </div>
+
+                <!-- Mousumi Mou -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/mousumi-mou.jpg" alt="Mousumi Mou" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Mousumi Mou</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Broadcaster &amp; Host</div>
+                </div>
+
+                <!-- Hasibur Rahman -->
+                <div class="speaker-card flex flex-col items-center">
+                  <div class="w-full aspect-[3/4] rounded-lg overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                    <img src="assets/images/speakers/hasibur-rahman.jpg" alt="Hasibur Rahman" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                  </div>
+                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Hasibur Rahman</div>
+                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Educator &amp; Speaker</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 8. CONTACT SECTION (PAGE 8 SPEC)                         -->
+  <!-- ======================================================== -->
+  <section id="contact" class="py-16 relative z-10 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="mb-10 text-center reveal">
+        <h2 class="font-display text-5xl sm:text-6xl text-slate-900 leading-tight mb-2 tracking-wide">
+          CONTACT
+        </h2>
+        <p class="text-slate-600 text-sm font-sans">Reach out to the organizing committee for queries and delegation support.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <!-- Venue -->
+        <div class="border border-slate-200 bg-white rounded-xl p-6 text-center shadow-sm reveal">
+          <i class="fa-solid fa-location-dot text-amber-600 text-xl mb-3"></i>
+          <div class="font-sans text-xs font-bold text-amber-700 uppercase mb-1">Venue</div>
+          <div class="font-bold text-slate-900 text-sm mb-1 font-sans">BAU Campus</div>
+          <p class="text-slate-600 text-xs font-sans">Mymensingh 2202, Bangladesh</p>
+        </div>
+
+        <!-- Email: Exactly baulanguageclub@gmail.com from Page 8 spec -->
+        <div class="border border-slate-200 bg-white rounded-xl p-6 text-center shadow-sm reveal" style="transition-delay: 0.1s;">
+          <i class="fa-solid fa-envelope text-amber-600 text-xl mb-3"></i>
+          <div class="font-sans text-xs font-bold text-amber-700 uppercase mb-1">Email</div>
+          <div class="font-bold text-slate-900 text-sm mb-1 font-sans">General Inquiries</div>
+          <a href="mailto:baulanguageclub@gmail.com" class="text-emerald-700 hover:text-emerald-800 font-semibold text-xs font-sans break-all">baulanguageclub@gmail.com</a>
+        </div>
+
+        <!-- Helpline -->
+        <div class="border border-slate-200 bg-white rounded-xl p-6 text-center shadow-sm reveal" style="transition-delay: 0.2s;">
+          <i class="fa-solid fa-phone text-amber-600 text-xl mb-3"></i>
+          <div class="font-sans text-xs font-bold text-amber-700 uppercase mb-1">Helpline</div>
+          <div class="font-bold text-slate-900 text-sm mb-1 font-sans">Committee Desk</div>
+          <p class="text-slate-600 text-xs font-sans">+880 1700-000000 &bull; +880 1800-000000</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 9. FOOTER (PAGE 8 SPEC: MATCHED WITH HEADER LINKS)       -->
+  <!-- ======================================================== -->
+  <footer class="bg-white text-slate-800 py-12 border-t border-slate-200 relative z-10">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <!-- BAULC Emblem & Motto -->
+      <div class="flex flex-col items-center justify-center gap-2 mb-6">
+        <div class="flex items-center gap-2 text-emerald-700 font-sans text-xs uppercase tracking-widest font-semibold">
+          <i class="fa-solid fa-earth-americas text-base text-emerald-600"></i>
+          <span>EXPLORING THE WORLD OF LANGUAGE</span>
+        </div>
+        <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-widest mt-1">
+          BANGLADESH AGRICULTURAL UNIVERSITY LANGUAGE CLUB
+        </h4>
+      </div>
+
+      <!-- Single Consolidated Link Row (Matched to Header per Page 8 note) -->
+      <div class="flex items-center gap-4 sm:gap-6 text-slate-600 flex-wrap justify-center font-sans text-xs uppercase font-semibold tracking-wider mb-6">
+        <a href="#about" class="hover:text-slate-900 transition-colors">About</a>
+        <a href="#timeline" class="hover:text-slate-900 transition-colors">Timeline</a>
+        <a href="#segments" class="hover:text-slate-900 transition-colors">Segments</a>
+        <a href="#process" class="hover:text-slate-900 transition-colors">Process</a>
+        <a href="#legacy" class="hover:text-slate-900 transition-colors">Legacy</a>
+        <a href="#contact" class="hover:text-slate-900 transition-colors">Contact</a>
+      </div>
+
+      <!-- Social Media Icons Group -->
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <a href="https://www.facebook.com/share/1FM6idkjqt/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition-colors shadow-sm" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f text-sm"></i>
+        </a>
+        <a href="https://www.instagram.com/baulc.2018?xtok=MXQ2ODk0d3JtNmU2Zw==" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:text-white hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent transition-colors shadow-sm" aria-label="Instagram">
+          <i class="fa-brands fa-instagram text-sm"></i>
+        </a>
+        <a href="https://youtube.com/@baulc?si=xJ2ANr7xvAqVYvzR" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition-colors shadow-sm" aria-label="YouTube">
+          <i class="fa-brands fa-youtube text-sm"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/baulc2018/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full border border-slate-300 flex items-center justify-center text-slate-600 hover:text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition-colors shadow-sm" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin-in text-sm"></i>
+        </a>
+      </div>
+
+      <!-- Copyright Line -->
+      <div class="pt-6 border-t border-slate-200 text-xs text-slate-500 font-sans">
+        <p>&copy; 2026 National Language Fest (NLF '26). Hosted by BAULC at BAU, Mymensingh.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button id="backToTop" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Back to top" title="Back to top">
+    <i class="fa-solid fa-arrow-up text-xs"></i>
+  </button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
