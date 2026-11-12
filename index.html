@@ -450,7 +450,6 @@
           @click="activeFilter = 'bangla'" 
           :class="activeFilter === 'bangla' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
-          <i class="fa-solid fa-feather-pointed text-xs"></i>
           <span>Bangla Heritage</span>
           <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'bangla' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">3</span>
         </button>
@@ -459,7 +458,6 @@
           @click="activeFilter = 'global'" 
           :class="activeFilter === 'global' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
-          <i class="fa-solid fa-earth-americas text-xs"></i>
           <span>Global Olympiads</span>
           <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'global' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">5</span>
         </button>
@@ -468,7 +466,6 @@
           @click="activeFilter = 'creative'" 
           :class="activeFilter === 'creative' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
-          <i class="fa-solid fa-lightbulb text-xs"></i>
           <span>Creative &amp; Arts</span>
           <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'creative' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">4</span>
         </button>
@@ -479,148 +476,88 @@
         
         <!-- 1. সাহিত্যোৎসব -->
         <div x-show="activeFilter === 'all' || activeFilter === 'bangla'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-feather-pointed"></i>
-            </div>
-            <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900 leading-none">সাহিত্যোৎসব</h4>
-          </div>
+          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900 leading-none">সাহিত্যোৎসব</h4>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">01</span>
         </div>
 
         <!-- 2. ব্যাকরণ ব্যঞ্জন -->
         <div x-show="activeFilter === 'all' || activeFilter === 'bangla'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-spell-check"></i>
-            </div>
-            <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900 leading-none">ব্যাকরণ ব্যঞ্জন</h4>
-          </div>
+          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900 leading-none">ব্যাকরণ ব্যঞ্জন</h4>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">02</span>
         </div>
 
         <!-- 3. Fiction Fusion -->
         <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-blue-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-pen-fancy"></i>
-            </div>
-            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Fiction Fusion</h4>
-          </div>
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Fiction Fusion</h4>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">03</span>
         </div>
 
         <!-- 4. Connecting the dots -->
         <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-amber-600 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-circle-nodes"></i>
-            </div>
-            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Connecting the dots</h4>
-          </div>
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Connecting the dots</h4>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">04</span>
         </div>
 
         <!-- 5. Japanese -->
         <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-rose-600 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-torii-gate"></i>
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Japanese</h4>
-              <span class="text-xs px-2 py-0.5 rounded-none bg-rose-100 text-rose-700 font-semibold border border-rose-200 font-sans">日本語</span>
-            </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Japanese</h4>
+            <span class="text-xs px-2 py-0.5 rounded-none bg-rose-100 text-rose-700 font-semibold border border-rose-200 font-sans">日本語</span>
           </div>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">05</span>
         </div>
 
         <!-- 6. Spanish -->
         <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-amber-600 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-earth-americas"></i>
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Spanish</h4>
-              <span class="text-xs px-2 py-0.5 rounded-none bg-amber-100 text-amber-700 font-semibold border border-amber-200 font-sans">Español</span>
-            </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Spanish</h4>
+            <span class="text-xs px-2 py-0.5 rounded-none bg-amber-100 text-amber-700 font-semibold border border-amber-200 font-sans">Español</span>
           </div>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">06</span>
         </div>
 
         <!-- 7. German -->
         <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-yellow-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-landmark"></i>
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">German</h4>
-              <span class="text-xs px-2 py-0.5 rounded-none bg-yellow-100 text-yellow-800 font-semibold border border-yellow-200 font-sans">Deutsch</span>
-            </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">German</h4>
+            <span class="text-xs px-2 py-0.5 rounded-none bg-yellow-100 text-yellow-800 font-semibold border border-yellow-200 font-sans">Deutsch</span>
           </div>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">07</span>
         </div>
 
         <!-- 8. Arabic -->
         <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-moon"></i>
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Arabic</h4>
-              <span class="text-xs px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-800 font-semibold border border-emerald-200 font-sans">العربية</span>
-            </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Arabic</h4>
+            <span class="text-xs px-2 py-0.5 rounded-none bg-emerald-100 text-emerald-800 font-semibold border border-emerald-200 font-sans">العربية</span>
           </div>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">08</span>
         </div>
 
         <!-- 9. Korean -->
         <div x-show="activeFilter === 'all' || activeFilter === 'global'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-indigo-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-yin-yang"></i>
-            </div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Korean</h4>
-              <span class="text-xs px-2 py-0.5 rounded-none bg-indigo-100 text-indigo-700 font-semibold border border-indigo-200 font-sans">한국어</span>
-            </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Korean</h4>
+            <span class="text-xs px-2 py-0.5 rounded-none bg-indigo-100 text-indigo-700 font-semibold border border-indigo-200 font-sans">한국어</span>
           </div>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">09</span>
         </div>
 
         <!-- 10. Anime Tales -->
         <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-purple-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-clapperboard"></i>
-            </div>
-            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Anime Tales</h4>
-          </div>
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Anime Tales</h4>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">10</span>
         </div>
 
         <!-- 11. শব্দ, গল্প, কৃত্য -->
         <div x-show="activeFilter === 'all' || activeFilter === 'bangla'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-emerald-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-microphone-lines"></i>
-            </div>
-            <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900 leading-none">শব্দ, গল্প, কৃত্য</h4>
-          </div>
+          <h4 class="font-bengali text-xl sm:text-2xl font-bold text-slate-900 leading-none">শব্দ, গল্প, কৃত্য</h4>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">11</span>
         </div>
 
         <!-- 12. Wall Magazine -->
         <div x-show="activeFilter === 'all' || activeFilter === 'creative'" x-transition class="template-card flex items-center justify-between p-4 sm:p-5 reveal group">
-          <div class="flex items-center gap-3.5">
-            <div class="w-11 h-11 rounded-none bg-white border border-slate-300 flex items-center justify-center text-sky-700 text-lg shadow-sm shrink-0 group-hover:bg-[#032119] group-hover:text-[#fdba12] group-hover:border-[#032119] transition-all">
-              <i class="fa-solid fa-palette"></i>
-            </div>
-            <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Wall Magazine</h4>
-          </div>
+          <h4 class="font-sans text-lg sm:text-xl font-bold text-slate-900 leading-none">Wall Magazine</h4>
           <span class="font-display text-2xl text-slate-400/40 select-none group-hover:text-slate-600 transition-colors">12</span>
         </div>
 
