@@ -830,13 +830,10 @@
       <!-- 7.2 NLF EDITIONS CAROUSEL (NLF23, NLF24, NLF25)     -->
       <!-- ---------------------------------------------------- -->
       <div class="max-w-5xl mx-auto reveal" 
-           x-data="legacyCarousel()" 
-           x-init="init()" 
-           @mouseenter="pause()" 
-           @mouseleave="resume()">
+           x-data="legacyCarousel()">
         
         <!-- CAROUSEL TOP NAVIGATION & CONTROL BAR -->
-        <div class="bg-[#032119] text-white p-3 sm:p-4 border border-slate-300 border-b-0 flex flex-wrap items-center justify-between gap-3 select-none">
+        <div class="bg-[#032119] text-white p-3 sm:p-4 border border-slate-300 flex flex-wrap items-center justify-between gap-3 select-none">
           
           <!-- Edition Direct Selector Tabs -->
           <div class="flex items-center gap-1 sm:gap-2 flex-wrap">
@@ -889,11 +886,6 @@
             </button>
           </div>
 
-        </div>
-
-        <!-- PROGRESS BAR -->
-        <div class="w-full h-1 bg-slate-800 overflow-hidden relative">
-          <div class="h-full bg-[#fdba12] transition-[width] ease-linear duration-75" :style="'width: ' + progress + '%'"></div>
         </div>
 
         <!-- CAROUSEL TRACK VIEWPORT (INTERACTIVE SWIPE & DRAG) -->

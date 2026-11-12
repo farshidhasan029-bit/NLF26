@@ -187,10 +187,6 @@
     return {
       current: 0,
       total: 3,
-      autoplay: true,
-      duration: 6000,
-      progressTimer: null,
-      progress: 0,
 
       // Live drag & swipe tracking
       isDragging: false,
@@ -200,61 +196,22 @@
       isHorizontalSwipe: null,
 
       init() {
-        this.startAutoplay();
-      },
-      startAutoplay() {
-        this.stopAutoplay();
-        if (!this.autoplay) return;
-        this.progress = 0;
-        const intervalStep = 50;
-        const increment = (intervalStep / this.duration) * 100;
-
-        this.progressTimer = setInterval(() => {
-          if (this.progress >= 100) {
-            this.next();
-          } else {
-            this.progress += increment;
-          }
-        }, intervalStep);
-      },
-      stopAutoplay() {
-        if (this.progressTimer) {
-          clearInterval(this.progressTimer);
-          this.progressTimer = null;
-        }
-      },
-      pause() {
-        this.stopAutoplay();
-      },
-      resume() {
-        if (!this.isDragging && this.autoplay) {
-          this.startAutoplay();
-        }
+        // Static manual slider: auto-interval disabled per user request
       },
       goTo(index) {
         this.current = Math.max(0, Math.min(this.total - 1, index));
         this.dragOffset = 0;
-        this.progress = 0;
-        if (this.autoplay) {
-          this.startAutoplay();
-        }
       },
       next() {
         this.current = (this.current + 1) % this.total;
         this.dragOffset = 0;
-        this.progress = 0;
-        if (this.autoplay) {
-          this.startAutoplay();
-        }
       },
       prev() {
         this.current = (this.current - 1 + this.total) % this.total;
         this.dragOffset = 0;
-        this.progress = 0;
-        if (this.autoplay) {
-          this.startAutoplay();
-        }
       },
+      pause() {},
+      resume() {},
 
       // Live interactive swipe & drag handlers
       handlePointerDown(e) {
