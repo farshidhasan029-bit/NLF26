@@ -350,5 +350,18 @@ body {
   transition: all 0.2s ease;
 }
 
+.carousel-viewport {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.carousel-viewport img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+
 
 

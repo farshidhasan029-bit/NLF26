@@ -191,8 +191,14 @@
       duration: 6000,
       progressTimer: null,
       progress: 0,
-      touchStartX: 0,
-      touchEndX: 0,
+
+      // Live drag & swipe tracking
+      isDragging: false,
+      startX: 0,
+      startY: 0,
+      dragOffset: 0,
+      isHorizontalSwipe: null,
+
       init() {
         this.startAutoplay();
       },
@@ -221,21 +227,13 @@
         this.stopAutoplay();
       },
       resume() {
-        if (this.autoplay) {
+        if (!this.isDragging && this.autoplay) {
           this.startAutoplay();
-        }
-      },
-      toggleAutoplay() {
-        this.autoplay = !this.autoplay;
-        if (this.autoplay) {
-          this.startAutoplay();
-        } else {
-          this.stopAutoplay();
-          this.progress = 0;
         }
       },
       goTo(index) {
-        this.current = index;
+        this.current = Math.max(0, Math.min(this.total - 1, index));
+        this.dragOffset = 0;
         this.progress = 0;
         if (this.autoplay) {
           this.startAutoplay();
@@ -243,6 +241,7 @@
       },
       next() {
         this.current = (this.current + 1) % this.total;
+        this.dragOffset = 0;
         this.progress = 0;
         if (this.autoplay) {
           this.startAutoplay();
@@ -250,29 +249,77 @@
       },
       prev() {
         this.current = (this.current - 1 + this.total) % this.total;
+        this.dragOffset = 0;
         this.progress = 0;
         if (this.autoplay) {
           this.startAutoplay();
         }
       },
-      handleTouchStart(e) {
-        if (e.changedTouches && e.changedTouches[0]) {
-          this.touchStartX = e.changedTouches[0].screenX;
-        }
+
+      // Live interactive swipe & drag handlers
+      handlePointerDown(e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        if (e.target && e.target.closest && e.target.closest('button, a, input, select, textarea')) return;
+
+        this.isDragging = true;
+        this.startX = e.clientX;
+        this.startY = e.clientY;
+        this.dragOffset = 0;
+        this.isHorizontalSwipe = null;
         this.pause();
+
+        if (e.currentTarget && e.currentTarget.setPointerCapture) {
+          try {
+            e.currentTarget.setPointerCapture(e.pointerId);
+          } catch (err) {}
+        }
       },
-      handleTouchEnd(e) {
-        if (e.changedTouches && e.changedTouches[0]) {
-          this.touchEndX = e.changedTouches[0].screenX;
-          const diff = this.touchStartX - this.touchEndX;
-          if (Math.abs(diff) > 40) {
-            if (diff > 0) {
-              this.next();
-            } else {
-              this.prev();
-            }
+      handlePointerMove(e) {
+        if (!this.isDragging) return;
+
+        const deltaX = e.clientX - this.startX;
+        const deltaY = e.clientY - this.startY;
+
+        if (this.isHorizontalSwipe === null) {
+          if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
+            this.isHorizontalSwipe = Math.abs(deltaX) >= Math.abs(deltaY);
           }
         }
+
+        if (this.isHorizontalSwipe) {
+          // Rubber-band resistance at extremes
+          if ((this.current === 0 && deltaX > 0) || (this.current === this.total - 1 && deltaX < 0)) {
+            this.dragOffset = deltaX * 0.35;
+          } else {
+            this.dragOffset = deltaX;
+          }
+        }
+      },
+      handlePointerUp(e) {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+
+        if (e.currentTarget && e.currentTarget.releasePointerCapture) {
+          try {
+            e.currentTarget.releasePointerCapture(e.pointerId);
+          } catch (err) {}
+        }
+
+        const threshold = 50;
+        if (this.isHorizontalSwipe) {
+          if (this.dragOffset < -threshold) {
+            this.next();
+          } else if (this.dragOffset > threshold) {
+            this.prev();
+          }
+        }
+
+        this.dragOffset = 0;
+        this.resume();
+      },
+      handlePointerCancel(e) {
+        this.isDragging = false;
+        this.dragOffset = 0;
         this.resume();
       }
     };
