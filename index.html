@@ -1115,14 +1115,14 @@
         </p>
       </div>
 
-      <!-- Interactive Category Filter Tabs -->
-      <div class="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10 reveal">
+      <!-- Interactive Category Filter Tabs (Visible when photos are added) -->
+      <div x-show="items.length > 0" class="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-8 sm:mb-10 reveal">
         <button 
           @click="activeFilter = 'all'" 
           :class="activeFilter === 'all' ? 'bg-[#032119] text-[#fdba12] border-[#032119] shadow-md' : 'bg-[#eaedf2] text-slate-700 hover:bg-[#dfe4ec] border-slate-300'" 
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
           <span>All Moments</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'all' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">8</span>
+          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'all' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'" x-text="items.length"></span>
         </button>
 
         <button 
@@ -1131,7 +1131,6 @@
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
           <i class="fa-solid fa-flag text-xs"></i>
           <span>Editions (NLF 23-25)</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'editions' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">3</span>
         </button>
 
         <button 
@@ -1140,7 +1139,6 @@
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
           <i class="fa-solid fa-trophy text-xs"></i>
           <span>Competitions &amp; Awards</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'competitions' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">2</span>
         </button>
 
         <button 
@@ -1149,7 +1147,6 @@
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
           <i class="fa-solid fa-microphone-lines text-xs"></i>
           <span>Keynotes &amp; Sessions</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'sessions' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">1</span>
         </button>
 
         <button 
@@ -1158,12 +1155,11 @@
           class="px-4 py-2 text-xs sm:text-sm font-sans font-bold uppercase tracking-wider rounded-none border transition-all duration-200 flex items-center gap-2 cursor-pointer">
           <i class="fa-solid fa-palette text-xs"></i>
           <span>Exhibitions &amp; Campus</span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded-none" :class="activeFilter === 'exhibitions' ? 'bg-white/20 text-[#fdba12]' : 'bg-slate-300 text-slate-800'">2</span>
         </button>
       </div>
 
-      <!-- Responsive Grid with Square Right-Angled Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      <!-- Responsive Grid with Square Right-Angled Cards (Visible when photos are added) -->
+      <div x-show="items.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <template x-for="(item, index) in filteredItems" :key="item.src">
           <div @click="open(index)" 
                class="gallery-card rounded-none overflow-hidden border border-slate-200 bg-slate-50 shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer flex flex-col reveal">
@@ -1192,6 +1188,17 @@
             </div>
           </div>
         </template>
+      </div>
+
+      <!-- Clean Placeholder State Awaiting User Provided Photos -->
+      <div x-show="items.length === 0" class="border border-dashed border-slate-300 bg-slate-50/70 rounded-none p-10 sm:p-14 text-center max-w-2xl mx-auto reveal">
+        <div class="w-14 h-14 rounded-none bg-white border border-slate-300 mx-auto flex items-center justify-center text-emerald-700 text-xl shadow-sm mb-3.5">
+          <i class="fa-regular fa-images"></i>
+        </div>
+        <h3 class="font-sans font-bold text-slate-800 text-base sm:text-lg mb-1">Festival Gallery</h3>
+        <p class="text-slate-600 text-xs sm:text-sm font-sans max-w-md mx-auto">
+          Gallery section is configured and ready. Photographs will be featured here as provided.
+        </p>
       </div>
 
       <!-- Lightbox Modal -->
