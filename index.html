@@ -827,273 +827,378 @@
       </div>
 
       <!-- ---------------------------------------------------- -->
-      <!-- 7.2 NLF23 (PAGE 6 SPEC)                              -->
+      <!-- 7.2 NLF EDITIONS CAROUSEL (NLF23, NLF24, NLF25)     -->
       <!-- ---------------------------------------------------- -->
-      <div class="max-w-5xl mx-auto mb-10 sm:mb-12 reveal">
-        <div class="border border-slate-200 bg-slate-50 rounded-none overflow-hidden shadow-sm">
+      <div class="max-w-5xl mx-auto reveal" 
+           x-data="legacyCarousel()" 
+           x-init="init()" 
+           @mouseenter="pause()" 
+           @mouseleave="resume()"
+           @touchstart.passive="handleTouchStart($event)"
+           @touchend.passive="handleTouchEnd($event)">
+        
+        <!-- CAROUSEL TOP NAVIGATION & CONTROL BAR -->
+        <div class="bg-[#032119] text-white p-3 sm:p-4 border border-slate-300 border-b-0 flex flex-wrap items-center justify-between gap-3 select-none">
           
-          <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
-            <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
-              NLF23
-            </h3>
-            <span class="text-xs uppercase font-sans font-semibold tracking-wider text-emerald-700">Inaugural Edition &bull; 2023</span>
+          <!-- Edition Direct Selector Tabs -->
+          <div class="flex items-center gap-1 sm:gap-2 flex-wrap">
+            <button 
+              type="button"
+              @click="goTo(0)" 
+              :class="current === 0 ? 'bg-[#fdba12] text-slate-950 font-bold shadow-sm' : 'bg-white/10 text-slate-200 hover:bg-white/20'"
+              class="legacy-nav-btn px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-sans uppercase tracking-wider rounded-none transition-all flex items-center gap-1.5 cursor-pointer">
+              <span>NLF23</span>
+              <span class="text-[10px] opacity-80 font-mono hidden sm:inline">(2023)</span>
+            </button>
+
+            <button 
+              type="button"
+              @click="goTo(1)" 
+              :class="current === 1 ? 'bg-[#fdba12] text-slate-950 font-bold shadow-sm' : 'bg-white/10 text-slate-200 hover:bg-white/20'"
+              class="legacy-nav-btn px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-sans uppercase tracking-wider rounded-none transition-all flex items-center gap-1.5 cursor-pointer">
+              <span>NLF24</span>
+              <span class="text-[10px] opacity-80 font-mono hidden sm:inline">(2024)</span>
+            </button>
+
+            <button 
+              type="button"
+              @click="goTo(2)" 
+              :class="current === 2 ? 'bg-[#fdba12] text-slate-950 font-bold shadow-sm' : 'bg-white/10 text-slate-200 hover:bg-white/20'"
+              class="legacy-nav-btn px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-sans uppercase tracking-wider rounded-none transition-all flex items-center gap-1.5 cursor-pointer">
+              <span>NLF25</span>
+              <span class="text-[10px] opacity-80 font-mono hidden sm:inline">(2025)</span>
+            </button>
           </div>
 
-          <!-- nlf23-image.jpg -->
-          <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
-            <img src="assets/images/nlf23-image.jpg" alt="National Language Fest 2023 Stage & Participants" class="w-full h-auto rounded-none shadow-sm hover:shadow-md transition-shadow">
-            <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
-              <span class="flex items-center gap-1.5 font-medium text-slate-800">
-                <i class="fa-solid fa-camera text-emerald-600"></i>
-                <span>National Language Fest 2023 &bull; Grand Gala</span>
-              </span>
-              <span class="text-[11px] text-slate-500">BAU Central Auditorium Stage</span>
+          <!-- Slide Controls & Indicator -->
+          <div class="flex items-center gap-2 sm:gap-3 ml-auto">
+            <!-- Counter badge -->
+            <span class="text-xs font-mono tracking-widest text-[#fdba12] px-2.5 py-1 bg-white/5 border border-white/10">
+              <span x-text="String(current + 1).padStart(2, '0')">01</span> / 03
+            </span>
+
+            <!-- Autoplay Pause / Play Toggle -->
+            <button 
+              type="button"
+              @click="toggleAutoplay()" 
+              :title="autoplay ? 'Pause auto-slide' : 'Resume auto-slide'"
+              class="w-8 h-8 rounded-none border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xs transition-colors cursor-pointer">
+              <i :class="autoplay ? 'fa-solid fa-pause' : 'fa-solid fa-play text-[#fdba12]'"></i>
+            </button>
+
+            <!-- Prev Arrow -->
+            <button 
+              type="button"
+              @click="prev()" 
+              title="Previous Edition"
+              class="w-8 h-8 rounded-none border border-white/20 bg-white/10 hover:bg-[#fdba12] hover:text-slate-950 hover:border-[#fdba12] text-white flex items-center justify-center text-xs transition-all cursor-pointer">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <!-- Next Arrow -->
+            <button 
+              type="button"
+              @click="next()" 
+              title="Next Edition"
+              class="w-8 h-8 rounded-none border border-white/20 bg-white/10 hover:bg-[#fdba12] hover:text-slate-950 hover:border-[#fdba12] text-white flex items-center justify-center text-xs transition-all cursor-pointer">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="w-full h-1 bg-slate-800 overflow-hidden relative">
+          <div class="h-full bg-[#fdba12] transition-[width] ease-linear duration-75" :style="'width: ' + progress + '%'"></div>
+        </div>
+
+        <!-- CAROUSEL TRACK VIEWPORT -->
+        <div class="overflow-hidden border border-slate-200 border-t-0 bg-slate-50 shadow-sm relative">
+          <div class="flex transition-transform duration-500 ease-in-out items-start" :style="'transform: translateX(-' + (current * 100) + '%)'">
+            
+            <!-- -------------------------------------------------- -->
+            <!-- SLIDE 1: NLF23 (PAGE 6 SPEC)                       -->
+            <!-- -------------------------------------------------- -->
+            <div class="w-full flex-shrink-0">
+              <div class="p-6 sm:p-8 border-b border-slate-200 text-center bg-white/60">
+                <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+                  NLF23
+                </h3>
+                <span class="text-xs uppercase font-sans font-semibold tracking-wider text-emerald-700">Inaugural Edition &bull; 2023</span>
+              </div>
+
+              <!-- nlf23-image.jpg -->
+              <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
+                <img src="assets/images/nlf23-image.jpg" alt="National Language Fest 2023 Stage & Participants" class="w-full h-auto rounded-none shadow-sm hover:shadow-md transition-shadow">
+                <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
+                  <span class="flex items-center gap-1.5 font-medium text-slate-800">
+                    <i class="fa-solid fa-camera text-emerald-600"></i>
+                    <span>National Language Fest 2023 &bull; Grand Gala</span>
+                  </span>
+                  <span class="text-[11px] text-slate-500">BAU Central Auditorium Stage</span>
+                </div>
+              </div>
+
+              <!-- Description from Wireframe -->
+              <div class="p-6 sm:p-8">
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
+                  The National Language Fest 2023 hosted by the Bangladesh Agricultural University Language Club, was a groundbreaking two-day celebration of languages and cultures. Organized for the very first time, it marked a historic moment as Bangladesh Agricultural University witnessed such a unique and dynamic linguistic festival on its campus. Open to students nationwide, the event featured language-based competitions and insightful sessions conducted by expert speakers. Participants engaged in script writing, cultural performances, vocabulary challenges and linguistic explorations across Bangla, English, Japanese, French and Nepali. The second day offered practical skill-building workshops on IELTS, public speaking and email writing, culminating in a grand prize-giving ceremony that celebrated talent, creativity, and the power of expression.
+                </p>
+
+                <!-- Keynote Speakers of NLF23 -->
+                <div class="border-t border-slate-200 pt-6">
+                  <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
+                    Keynote Speakers of NLF23
+                  </h4>
+
+                  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
+                    <!-- Selina Hossain -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/selina-hossain.jpg" alt="Selina Hossain" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Selina Hossain</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Scholar</div>
+                    </div>
+
+                    <!-- Kamrul Hasan Kamu -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/kamrul-hasan-kamu.jpg" alt="Kamrul Hasan Kamu" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Kamrul Hasan Kamu</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Linguist &amp; Speaker</div>
+                    </div>
+
+                    <!-- Rafsan Sabab -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/rafsan-sabab.jpg" alt="Rafsan Sabab" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Rafsan Sabab</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Presenter &amp; Host</div>
+                    </div>
+
+                    <!-- Tasnim Binta Haque -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/tasnim-binta-haque.jpg" alt="Tasnim Binta Haque" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Tasnim Binta Haque</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Corporate Trainer</div>
+                    </div>
+
+                    <!-- Engg. Tasin Islam -->
+                    <div class="speaker-card col-span-2 sm:col-span-1 flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/engg-tasin-islam.jpg" alt="Engg. Tasin Islam" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Engg. Tasin Islam</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Leader</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
-          </div>
 
-          <!-- Description from Wireframe -->
-          <div class="p-6 sm:p-8">
-            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
-              The National Language Fest 2023 hosted by the Bangladesh Agricultural University Language Club, was a groundbreaking two-day celebration of languages and cultures. Organized for the very first time, it marked a historic moment as Bangladesh Agricultural University witnessed such a unique and dynamic linguistic festival on its campus. Open to students nationwide, the event featured language-based competitions and insightful sessions conducted by expert speakers. Participants engaged in script writing, cultural performances, vocabulary challenges and linguistic explorations across Bangla, English, Japanese, French and Nepali. The second day offered practical skill-building workshops on IELTS, public speaking and email writing, culminating in a grand prize-giving ceremony that celebrated talent, creativity, and the power of expression.
-            </p>
+            <!-- -------------------------------------------------- -->
+            <!-- SLIDE 2: NLF24 (PAGE 7 SPEC)                       -->
+            <!-- -------------------------------------------------- -->
+            <div class="w-full flex-shrink-0">
+              <div class="p-6 sm:p-8 border-b border-slate-200 text-center bg-white/60">
+                <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+                  NLF24
+                </h3>
+                <span class="text-xs uppercase font-sans font-semibold tracking-wider text-amber-700">BRAC Bank Presents &bull; 2024</span>
+              </div>
 
-            <!-- Keynote Speakers of NLF23 -->
-            <div class="border-t border-slate-200 pt-6">
-              <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
-                Keynote Speakers of NLF23
-              </h4>
+              <!-- nlf24-image.jpg -->
+              <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
+                <img src="assets/images/nlf24-image.jpg" alt="BRAC Bank Presents National Language Fest 2024 Stage &amp; Delegation" class="w-full h-auto rounded-none shadow-sm hover:shadow-md transition-shadow">
+                <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
+                  <span class="flex items-center gap-1.5 font-medium text-slate-800">
+                    <i class="fa-solid fa-camera text-amber-600"></i>
+                    <span>BRAC Bank Presents NLF 2024 &bull; Grand Stage</span>
+                  </span>
+                  <span class="text-[11px] text-slate-500">BAU Central Auditorium</span>
+                </div>
+              </div>
 
-              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
-                <!-- Selina Hossain -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/selina-hossain.jpg" alt="Selina Hossain" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+              <!-- Description from Wireframe -->
+              <div class="p-6 sm:p-8">
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
+                  BRAC Bank Presents National Language Fest 2024 organized by the Bangladesh Agricultural University Language Club was an even more vibrant and impactful celebration following the success of its debut edition in 2023. The fest featured an expanded range of intellectual and cultural competitions designed to celebrate the beauty and power of language through creativity, communication and critical thinking. Esteemed speakers, language professionals and industry experts conducted engaging sessions that enriched participants with practical knowledge and inspiration. With stronger nationwide reach, enhanced event design and amplified youth engagement, BRAC Bank Presents National Language Fest 2024 became a remarkable platform where passion met purpose and language built connections beyond boundaries.
+                </p>
+
+                <!-- Keynote Speakers of NLF24 -->
+                <div class="border-t border-slate-200 pt-6">
+                  <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
+                    Keynote Speakers of NLF24
+                  </h4>
+
+                  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 md:gap-3.5">
+                    <!-- Kingkor Ahsan -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/kingkor-ahsan.jpg" alt="Kingkor Ahsan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Kingkor Ahsan</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Novelist</div>
+                    </div>
+
+                    <!-- Rawnak Hasan -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/rawnak-hasan.jpg" alt="Rawnak Hasan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Rawnak Hasan</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Actor &amp; Director</div>
+                    </div>
+
+                    <!-- Mashfiq Enam Turjo -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/mashfiq-enam-turjo.jpg" alt="Mashfiq Enam Turjo" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Mashfiq Enam Turjo</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Orator &amp; Educator</div>
+                    </div>
+
+                    <!-- Limon Hasan -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/limon-hasan.jpg" alt="Limon Hasan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Limon Hasan</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Icon</div>
+                    </div>
+
+                    <!-- Noor Jannat Meem -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/noor-jannat-meem.jpg" alt="Noor Jannat Meem" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Noor Jannat Meem</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Icon</div>
+                    </div>
+
+                    <!-- Md. Ayman Noor -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/md-ayman-noor.jpg" alt="Md. Ayman Noor" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Md. Ayman Noor</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Skills Mentor</div>
+                    </div>
                   </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Selina Hossain</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Scholar</div>
                 </div>
 
-                <!-- Kamrul Hasan Kamu -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/kamrul-hasan-kamu.jpg" alt="Kamrul Hasan Kamu" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+              </div>
+            </div>
+
+            <!-- -------------------------------------------------- -->
+            <!-- SLIDE 3: NLF25 (PAGE 8 SPEC)                       -->
+            <!-- -------------------------------------------------- -->
+            <div class="w-full flex-shrink-0">
+              <div class="p-6 sm:p-8 border-b border-slate-200 text-center bg-white/60">
+                <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
+                  NLF25
+                </h3>
+                <span class="text-xs uppercase font-sans font-semibold tracking-wider text-emerald-700">Bornokunjo Edition &bull; 2025</span>
+              </div>
+
+              <!-- nlf25-image.jpg -->
+              <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
+                <img src="assets/images/nlf25-image.jpg" alt="National Language Fest 2025 Delegation &amp; Bornokunjo" class="w-full h-auto rounded-none shadow-sm hover:shadow-md transition-shadow">
+                <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
+                  <span class="flex items-center gap-1.5 font-medium text-slate-800">
+                    <i class="fa-solid fa-camera text-emerald-600"></i>
+                    <span>National Language Fest 2025 &bull; Bornokunjo Edition</span>
+                  </span>
+                  <span class="text-[11px] text-slate-500">Session &amp; Award Ceremony Stage</span>
+                </div>
+              </div>
+
+              <!-- Description from Wireframe -->
+              <div class="p-6 sm:p-8">
+                <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
+                  National Language Fest 2025 organized by the Bangladesh Agricultural University Language Club was another addition to the vibrant and impactful celebration following the success of its predecessors in 2023 and 2024. The fest featured an expanded range of intellectual and cultural competitions designed to celebrate the beauty and power of language through creativity, communication and critical thinking. With the addition of Bornokunjo, our newest segment the fest achieved new heights. Esteemed speakers, language professionals and industry experts conducted engaging sessions that enriched participants with practical knowledge and inspiration. With stronger nationwide reach, enhanced event design and amplified youth engagement, National Language Fest 2025 became a remarkable platform where passion met purpose and language built connections beyond boundaries.
+                </p>
+
+                <!-- Keynote Speakers of NLF25 -->
+                <div class="border-t border-slate-200 pt-6">
+                  <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
+                    Keynote Speakers of NLF25
+                  </h4>
+
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 md:gap-4">
+                    <!-- Sadat Hossain -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/sadat-hossain.jpg" alt="Sadat Hossain" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Sadat Hossain</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Filmmaker</div>
+                    </div>
+
+                    <!-- Shahnawaz Hossain Jay -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/shahnawaz-hossain-jay.jpg" alt="Shahnawaz Hossain Jay" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Shahnawaz Hossain Jay</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Leader</div>
+                    </div>
+
+                    <!-- Mousumi Mou -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/mousumi-mou.jpg" alt="Mousumi Mou" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Mousumi Mou</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Broadcaster &amp; Host</div>
+                    </div>
+
+                    <!-- Hasibur Rahman -->
+                    <div class="speaker-card flex flex-col items-center">
+                      <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
+                        <img src="assets/images/speakers/hasibur-rahman.jpg" alt="Hasibur Rahman" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
+                      </div>
+                      <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Hasibur Rahman</div>
+                      <div class="text-[11px] text-slate-500 font-sans mt-0.5">Educator &amp; Speaker</div>
+                    </div>
                   </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Kamrul Hasan Kamu</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Linguist &amp; Speaker</div>
                 </div>
 
-                <!-- Rafsan Sabab -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/rafsan-sabab.jpg" alt="Rafsan Sabab" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Rafsan Sabab</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Presenter &amp; Host</div>
-                </div>
-
-                <!-- Tasnim Binta Haque -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/tasnim-binta-haque.jpg" alt="Tasnim Binta Haque" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Tasnim Binta Haque</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Corporate Trainer</div>
-                </div>
-
-                <!-- Engg. Tasin Islam -->
-                <div class="speaker-card col-span-2 sm:col-span-1 flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/engg-tasin-islam.jpg" alt="Engg. Tasin Islam" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Engg. Tasin Islam</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Leader</div>
-                </div>
               </div>
             </div>
 
           </div>
-
         </div>
-      </div>
 
-      <!-- ---------------------------------------------------- -->
-      <!-- 7.3 NLF24 (PAGE 7 SPEC)                              -->
-      <!-- ---------------------------------------------------- -->
-      <div class="max-w-5xl mx-auto mb-10 sm:mb-12 reveal">
-        <div class="border border-slate-200 bg-slate-50 rounded-none overflow-hidden shadow-sm">
-          
-          <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
-            <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
-              NLF24
-            </h3>
-            <span class="text-xs uppercase font-sans font-semibold tracking-wider text-amber-700">BRAC Bank Presents &bull; 2024</span>
-          </div>
-
-          <!-- nlf24-image.jpg -->
-          <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
-            <img src="assets/images/nlf24-image.jpg" alt="BRAC Bank Presents National Language Fest 2024 Stage & Delegation" class="w-full h-auto rounded-none shadow-sm hover:shadow-md transition-shadow">
-            <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
-              <span class="flex items-center gap-1.5 font-medium text-slate-800">
-                <i class="fa-solid fa-camera text-amber-600"></i>
-                <span>BRAC Bank Presents NLF 2024 &bull; Grand Stage</span>
-              </span>
-              <span class="text-[11px] text-slate-500">BAU Central Auditorium</span>
-            </div>
-          </div>
-
-          <!-- Description from Wireframe -->
-          <div class="p-6 sm:p-8">
-            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
-              BRAC Bank Presents National Language Fest 2024 organized by the Bangladesh Agricultural University Language Club was an even more vibrant and impactful celebration following the success of its debut edition in 2023. The fest featured an expanded range of intellectual and cultural competitions designed to celebrate the beauty and power of language through creativity, communication and critical thinking. Esteemed speakers, language professionals and industry experts conducted engaging sessions that enriched participants with practical knowledge and inspiration. With stronger nationwide reach, enhanced event design and amplified youth engagement, BRAC Bank Presents National Language Fest 2024 became a remarkable platform where passion met purpose and language built connections beyond boundaries.
-            </p>
-
-            <!-- Keynote Speakers of NLF24 -->
-            <div class="border-t border-slate-200 pt-6">
-              <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
-                Keynote Speakers of NLF24
-              </h4>
-
-              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 md:gap-3.5">
-                <!-- Kingkor Ahsan -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/kingkor-ahsan.jpg" alt="Kingkor Ahsan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Kingkor Ahsan</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Novelist</div>
-                </div>
-
-                <!-- Rawnak Hasan -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/rawnak-hasan.jpg" alt="Rawnak Hasan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Rawnak Hasan</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Actor &amp; Director</div>
-                </div>
-
-                <!-- Mashfiq Enam Turjo -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/mashfiq-enam-turjo.jpg" alt="Mashfiq Enam Turjo" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Mashfiq Enam Turjo</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Orator &amp; Educator</div>
-                </div>
-
-                <!-- Limon Hasan -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/limon-hasan.jpg" alt="Limon Hasan" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Limon Hasan</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Icon</div>
-                </div>
-
-                <!-- Noor Jannat Meem -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/noor-jannat-meem.jpg" alt="Noor Jannat Meem" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Noor Jannat Meem</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Icon</div>
-                </div>
-
-                <!-- Md. Ayman Noor -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/md-ayman-noor.jpg" alt="Md. Ayman Noor" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Md. Ayman Noor</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Skills Mentor</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
+        <!-- BOTTOM SLIDE DOTS / INDICATOR ROW -->
+        <div class="flex items-center justify-center gap-2 mt-4 select-none">
+          <button 
+            type="button"
+            @click="goTo(0)" 
+            :class="current === 0 ? 'w-8 bg-[#032119]' : 'w-2 bg-slate-300 hover:bg-slate-400'" 
+            class="h-2 rounded-none transition-all duration-300 cursor-pointer"
+            title="Go to NLF23"></button>
+          <button 
+            type="button"
+            @click="goTo(1)" 
+            :class="current === 1 ? 'w-8 bg-[#032119]' : 'w-2 bg-slate-300 hover:bg-slate-400'" 
+            class="h-2 rounded-none transition-all duration-300 cursor-pointer"
+            title="Go to NLF24"></button>
+          <button 
+            type="button"
+            @click="goTo(2)" 
+            :class="current === 2 ? 'w-8 bg-[#032119]' : 'w-2 bg-slate-300 hover:bg-slate-400'" 
+            class="h-2 rounded-none transition-all duration-300 cursor-pointer"
+            title="Go to NLF25"></button>
         </div>
-      </div>
 
-      <!-- ---------------------------------------------------- -->
-      <!-- 7.4 NLF25 (PAGE 8 SPEC)                              -->
-      <!-- ---------------------------------------------------- -->
-      <div class="max-w-5xl mx-auto reveal">
-        <div class="border border-slate-200 bg-slate-50 rounded-none overflow-hidden shadow-sm">
-          
-          <div class="p-6 sm:p-8 border-b border-slate-200 text-center">
-            <h3 class="font-display text-4xl sm:text-5xl text-slate-900 tracking-wide">
-              NLF25
-            </h3>
-            <span class="text-xs uppercase font-sans font-semibold tracking-wider text-emerald-700">Bornokunjo Edition &bull; 2025</span>
-          </div>
-
-          <!-- nlf25-image.jpg -->
-          <div class="w-full bg-slate-100 relative p-3 sm:p-5 border-b border-slate-200">
-            <img src="assets/images/nlf25-image.jpg" alt="National Language Fest 2025 Delegation & Bornokunjo" class="w-full h-auto rounded-none shadow-sm hover:shadow-md transition-shadow">
-            <div class="mt-3 px-1 flex items-center justify-between flex-wrap gap-2 text-xs font-sans text-slate-500">
-              <span class="flex items-center gap-1.5 font-medium text-slate-800">
-                <i class="fa-solid fa-camera text-emerald-600"></i>
-                <span>National Language Fest 2025 &bull; Bornokunjo Edition</span>
-              </span>
-              <span class="text-[11px] text-slate-500">Session &amp; Award Ceremony Stage</span>
-            </div>
-          </div>
-
-          <!-- Description from Wireframe -->
-          <div class="p-6 sm:p-8">
-            <p class="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify mb-8">
-              National Language Fest 2025 organized by the Bangladesh Agricultural University Language Club was another addition to the vibrant and impactful celebration following the success of its predecessors in 2023 and 2024. The fest featured an expanded range of intellectual and cultural competitions designed to celebrate the beauty and power of language through creativity, communication and critical thinking. With the addition of Bornokunjo, our newest segment the fest achieved new heights. Esteemed speakers, language professionals and industry experts conducted engaging sessions that enriched participants with practical knowledge and inspiration. With stronger nationwide reach, enhanced event design and amplified youth engagement, National Language Fest 2025 became a remarkable platform where passion met purpose and language built connections beyond boundaries.
-            </p>
-
-            <!-- Keynote Speakers of NLF25 -->
-            <div class="border-t border-slate-200 pt-6">
-              <h4 class="font-display text-2xl sm:text-3xl text-slate-900 tracking-wide text-center mb-6">
-                Keynote Speakers of NLF25
-              </h4>
-
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 md:gap-4">
-                <!-- Sadat Hossain -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/sadat-hossain.jpg" alt="Sadat Hossain" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Sadat Hossain</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Author &amp; Filmmaker</div>
-                </div>
-
-                <!-- Shahnawaz Hossain Jay -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/shahnawaz-hossain-jay.jpg" alt="Shahnawaz Hossain Jay" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Shahnawaz Hossain Jay</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Youth Leader</div>
-                </div>
-
-                <!-- Mousumi Mou -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/mousumi-mou.jpg" alt="Mousumi Mou" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Mousumi Mou</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Broadcaster &amp; Host</div>
-                </div>
-
-                <!-- Hasibur Rahman -->
-                <div class="speaker-card flex flex-col items-center">
-                  <div class="w-full aspect-[3/4] rounded-none overflow-hidden bg-slate-100 mb-3 border border-slate-200">
-                    <img src="assets/images/speakers/hasibur-rahman.jpg" alt="Hasibur Rahman" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300">
-                  </div>
-                  <div class="font-sans font-bold text-slate-900 text-sm leading-snug">Hasibur Rahman</div>
-                  <div class="text-[11px] text-slate-500 font-sans mt-0.5">Educator &amp; Speaker</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
       </div>
 
     </div>

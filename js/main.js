@@ -162,6 +162,104 @@
 
   window.galleryModal = createGalleryData;
 
+  // --- 6. ALPINE.JS LEGACY EDITIONS CAROUSEL ---
+  function createLegacyCarouselData() {
+    return {
+      current: 0,
+      total: 3,
+      autoplay: true,
+      duration: 6000,
+      progressTimer: null,
+      progress: 0,
+      touchStartX: 0,
+      touchEndX: 0,
+      init() {
+        this.startAutoplay();
+      },
+      startAutoplay() {
+        this.stopAutoplay();
+        if (!this.autoplay) return;
+        this.progress = 0;
+        const intervalStep = 50;
+        const increment = (intervalStep / this.duration) * 100;
+
+        this.progressTimer = setInterval(() => {
+          if (this.progress >= 100) {
+            this.next();
+          } else {
+            this.progress += increment;
+          }
+        }, intervalStep);
+      },
+      stopAutoplay() {
+        if (this.progressTimer) {
+          clearInterval(this.progressTimer);
+          this.progressTimer = null;
+        }
+      },
+      pause() {
+        this.stopAutoplay();
+      },
+      resume() {
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      },
+      toggleAutoplay() {
+        this.autoplay = !this.autoplay;
+        if (this.autoplay) {
+          this.startAutoplay();
+        } else {
+          this.stopAutoplay();
+          this.progress = 0;
+        }
+      },
+      goTo(index) {
+        this.current = index;
+        this.progress = 0;
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      },
+      next() {
+        this.current = (this.current + 1) % this.total;
+        this.progress = 0;
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      },
+      prev() {
+        this.current = (this.current - 1 + this.total) % this.total;
+        this.progress = 0;
+        if (this.autoplay) {
+          this.startAutoplay();
+        }
+      },
+      handleTouchStart(e) {
+        if (e.changedTouches && e.changedTouches[0]) {
+          this.touchStartX = e.changedTouches[0].screenX;
+        }
+        this.pause();
+      },
+      handleTouchEnd(e) {
+        if (e.changedTouches && e.changedTouches[0]) {
+          this.touchEndX = e.changedTouches[0].screenX;
+          const diff = this.touchStartX - this.touchEndX;
+          if (Math.abs(diff) > 40) {
+            if (diff > 0) {
+              this.next();
+            } else {
+              this.prev();
+            }
+          }
+        }
+        this.resume();
+      }
+    };
+  }
+
+  window.legacyCarousel = createLegacyCarouselData;
+
   document.addEventListener('alpine:init', () => {
     if (window.Alpine) {
       window.Alpine.data('countdown', () => ({
@@ -187,6 +285,7 @@
       }));
 
       window.Alpine.data('galleryModal', createGalleryData);
+      window.Alpine.data('legacyCarousel', createLegacyCarouselData);
     }
   });
 })();
