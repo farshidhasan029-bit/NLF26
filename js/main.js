@@ -126,7 +126,98 @@
     }
   });
 
-  // --- 5. ALPINE.JS COUNTDOWN REGISTRATION ---
+  // --- 5. ALPINE.JS COUNTDOWN & GALLERY REGISTRATION ---
+  function createGalleryData() {
+    return {
+      activeFilter: 'all',
+      isOpen: false,
+      currentIndex: 0,
+      items: [
+        {
+          src: 'assets/images/gallery/nlf25-bornokunjo-stage.jpg',
+          title: 'NLF25 Bornokunjo Edition Stage & Delegation',
+          tag: 'NLF 2025 • Bornokunjo',
+          category: 'editions',
+          caption: 'National Language Fest 2025 closing ceremony and grand award stage at BAU.'
+        },
+        {
+          src: 'assets/images/gallery/competition-spelling-bee.jpg',
+          title: 'National Spelling Bee & Language Olympiad',
+          tag: 'Competition • Auditorium Stage',
+          category: 'competitions',
+          caption: 'High-intensity spelling bee and language olympiad competition in session.'
+        },
+        {
+          src: 'assets/images/gallery/auditorium-keynote-session.jpg',
+          title: 'Keynote Literary Session & Youth Oratory',
+          tag: 'Session • Central Auditorium',
+          category: 'sessions',
+          caption: 'Eminent speakers and authors addressing university students from across the country.'
+        },
+        {
+          src: 'assets/images/gallery/wall-magazine-exhibition.jpg',
+          title: 'Handcrafted Wall Magazine & Literary Exhibition',
+          tag: 'Exhibition • Campus Gallery',
+          category: 'exhibitions',
+          caption: 'Multilingual calligraphy posters, investigative articles, and handcrafted literary exhibits.'
+        },
+        {
+          src: 'assets/images/gallery/champion-awards-trophies.jpg',
+          title: 'Official Championship Trophies & Medals',
+          tag: 'Awards • Gala Ceremony',
+          category: 'competitions',
+          caption: 'Prestigious crystal trophies, gold medals, and merit certificates for fest champions.'
+        },
+        {
+          src: 'assets/images/gallery/nlf24-grand-audience.jpg',
+          title: 'NLF24 Grand Gala & Packed Auditorium',
+          tag: 'NLF 2024 • Celebration',
+          category: 'editions',
+          caption: 'Full-house celebration at BAU Central Auditorium during National Language Fest 2024.'
+        },
+        {
+          src: 'assets/images/gallery/nlf23-inaugural-celebration.jpg',
+          title: 'NLF23 Inaugural Stage Celebration',
+          tag: 'NLF 2023 • Founding Edition',
+          category: 'editions',
+          caption: 'Founding edition bringing delegations together to establish the National Language Fest legacy.'
+        },
+        {
+          src: 'assets/images/gallery/baulc-delegation-stage.jpg',
+          title: 'BAULC Organizing Committee & Mentors',
+          tag: 'Delegation • BAU Mymensingh',
+          category: 'exhibitions',
+          caption: 'The student leaders, organizers, and advisors behind the Bangladesh Agricultural University Language Club.'
+        }
+      ],
+      get filteredItems() {
+        if (this.activeFilter === 'all') return this.items;
+        return this.items.filter(item => item.category === this.activeFilter);
+      },
+      open(index) {
+        this.currentIndex = index;
+        this.isOpen = true;
+        document.body.style.overflow = 'hidden';
+      },
+      close() {
+        this.isOpen = false;
+        document.body.style.overflow = '';
+      },
+      next() {
+        const list = this.filteredItems;
+        if (!list || list.length === 0) return;
+        this.currentIndex = (this.currentIndex + 1) % list.length;
+      },
+      prev() {
+        const list = this.filteredItems;
+        if (!list || list.length === 0) return;
+        this.currentIndex = (this.currentIndex - 1 + list.length) % list.length;
+      }
+    };
+  }
+
+  window.galleryModal = createGalleryData;
+
   document.addEventListener('alpine:init', () => {
     if (window.Alpine) {
       window.Alpine.data('countdown', () => ({
@@ -150,6 +241,8 @@
           this.seconds = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
         },
       }));
+
+      window.Alpine.data('galleryModal', createGalleryData);
     }
   });
 })();

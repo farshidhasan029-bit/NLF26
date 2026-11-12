@@ -319,4 +319,16 @@ body {
   box-shadow: 0 12px 36px rgba(253, 186, 18, 0.2);
 }
 
+/* ── GALLERY SECTION CARDS (SQUARE EDGES & SMOOTH ELEVATION) ── */
+.gallery-card {
+  border-radius: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card:hover {
+  transform: translateY(-3px);
+  border-color: #94a3b8;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
 
