@@ -51,7 +51,7 @@
       });
     });
 
-    // --- 3. SCROLL REVEAL OBSERVER (PROACTIVE & FAILSAFE) ---
+    // --- 3. SCROLL REVEAL OBSERVER ---
     const reveals = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && reveals.length > 0) {
       document.documentElement.classList.add('js-reveal');
@@ -66,22 +66,42 @@
             }
           });
         },
-        { threshold: 0, rootMargin: '120px 0px 120px 0px' }
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
       );
 
       reveals.forEach((el) => {
         const rect = el.getBoundingClientRect();
-        if (rect.top < winHeight * 1.25) {
-          el.classList.add('visible');
+        // Elements in initial top viewport (hero) reveal immediately on load
+        if (rect.top < winHeight * 0.75 && rect.bottom > 0 && window.scrollY < 80) {
+          setTimeout(() => {
+            el.classList.add('visible');
+          }, 80);
         } else {
+          // Offscreen elements wait until user scrolls down!
           revealObserver.observe(el);
         }
       });
 
-      // Safety timeout: Ensure all elements become visible even on mobile desktop emulation
-      setTimeout(() => {
-        reveals.forEach((el) => el.classList.add('visible'));
-      }, 500);
+      // Proactive scroll listener for fluid responsive triggering
+      let scrollTicking = false;
+      window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(() => {
+            const vh = window.innerHeight || document.documentElement.clientHeight;
+            reveals.forEach((el) => {
+              if (!el.classList.contains('visible')) {
+                const r = el.getBoundingClientRect();
+                if (r.top < vh - 30 && r.bottom > 0) {
+                  el.classList.add('visible');
+                  revealObserver.unobserve(el);
+                }
+              }
+            });
+            scrollTicking = false;
+          });
+          scrollTicking = true;
+        }
+      }, { passive: true });
     } else {
       reveals.forEach((el) => el.classList.add('visible'));
     }
